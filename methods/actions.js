@@ -33,8 +33,6 @@ var functions = {
                 phoneNumber: req.body.phoneNumber,
                 password: req.body.password,
                 role: req.body.role,
-                pet: req.body.pet,
-                _id: req.body._id,
             });
             newUser.save(function (err, newUser) {
                 if (err) {
@@ -87,7 +85,7 @@ var functions = {
            const userPet = await User.findOne ({
                 email: req.body.email
            })
-            // userPet.pets.push (mongoose.Types.ObjectId(newPet._id))
+            userPet.pets.push (mongoose.Types.ObjectId(newPet._id))
             console.log(userPet)
 
             userPet.save(function(err,userPet){
@@ -273,6 +271,22 @@ var functions = {
             }
         })
     },
+
+    postPayment: function (req,res){
+        Payment.find({}, function(err, documents){
+            if(err){
+                res.send('Something went wrong');
+            }
+            else {
+                res.send(documents);
+                const imageCollection = req.app.locals.imageCollection;
+                imageCollection.find({})
+                .toArray()
+            }
+        })
+    },
+
+  
 
         deleteDataUser: function (req,res){
             User.findOneAndDelete({

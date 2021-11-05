@@ -45,6 +45,8 @@ router.post('/postSuggestion', actions.postSuggestions)
 
 router.post('/postVisitor', actions.postVisitors)
 
+router.post('/postPayment', actions.postPayment)
+
 router.post('/deleteDataUser', actions.deleteDataUser)
 
 router.get('/checkEmail/:email', actions.checkEmail)

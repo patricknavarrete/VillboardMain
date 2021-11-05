@@ -37,7 +37,7 @@ var userSchema = new Schema({
         default: 'homeowners'
     },
     pets: {
-        type: mongoose.Schema.Types.ObjectId,
+        type: Array,
         default: []
         }
 })
