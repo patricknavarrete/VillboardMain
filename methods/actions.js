@@ -3,9 +3,11 @@ var Suggestion = require ('../models/suggestion')
 var Visitor = require ('../models/visitor')
 var Payment = require ('../models/payment')
 var Upload = require ('../middleware/upload')
+var Pet = require ('../models/pet')
 var jwt = require('jwt-simple')
 var config = require('../config/dbconfig')
 var bcrypt = require('bcrypt')
+var mongoose = require('mongoose')
 
 
 var functions = {
@@ -30,7 +32,9 @@ var functions = {
                 address: req.body.address,
                 phoneNumber: req.body.phoneNumber,
                 password: req.body.password,
-                role: req.body.role
+                role: req.body.role,
+                pet: req.body.pet,
+                _id: req.body._id,
             });
             newUser.save(function (err, newUser) {
                 if (err) {
@@ -42,6 +46,68 @@ var functions = {
             })
         }
     },
+
+
+    addPet: async function async (req,res){
+        if ((!req.body.pFirstName) ||
+        (!req.body.pLastName) ||
+        (!req.body.pAddress) ||
+        (!req.body.pPhoneNumber)||
+        (!req.body.petName)||
+        (!req.body.petBreed)
+         )
+        {
+            res.json ({success: false, msg: 'please enter your report'})
+        } 
+        else {
+            var newPet = Pet({
+                pFirstName: req.body.pFirstName,
+                pLastName : req.body.pLastName,
+                pAddress : req.body.pAddress,
+                pPhoneNumber : req.body.pPhoneNumber,
+                petName: req.body.petName,
+                petBreed: req.body.petBreed,
+                pEmail: req.body.pEmail,
+            });
+
+            newPet.save()
+
+            // User.aggregate([{ 
+            //     $lookup: {
+            //      from: 'User',
+            //      localField: 'pets_Id',
+            //      foreignField: 'pets_Id',
+            //      as: 'pets'
+            //     }},
+            //     { 
+            //      $unwind: '$pets'
+            //     }
+            //    ]);
+
+           const userPet = await User.findOne ({
+                email: req.body.email
+           })
+            // userPet.pets.push (mongoose.Types.ObjectId(newPet._id))
+            console.log(userPet)
+
+            userPet.save(function(err,userPet){
+                if (err){
+                    res.json({success: false, msg: 'Failed to save Pet'})
+                }
+                else {
+                    res.json({success: true, msg: 'Successfully AddedPet'})
+                }
+            })
+
+        }
+
+        
+    },
+
+        
+
+
+
 
     addPayment: function (req, res) {
         if ((!req.body.uFirstName) || 
@@ -71,6 +137,8 @@ var functions = {
             const imageCollection = req.app.locals.imageCollection
             const uploaded = req.file.location
             console.log(req.file)
+
+
 
 
             newPayment.save(function (err, newPayment) {

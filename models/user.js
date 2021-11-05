@@ -2,6 +2,7 @@ var mongoose = require('mongoose')
 var Schema = mongoose.Schema;
 var bcrypt = require('bcrypt')
 var userSchema = new Schema({
+    userID_id: Schema.Types.ObjectId,
     email: {
         type: String,
         require: true
@@ -34,7 +35,11 @@ var userSchema = new Schema({
         type: String,
         require: true,
         default: 'homeowners'
-    }
+    },
+    pets: {
+        type: mongoose.Schema.Types.ObjectId,
+        default: []
+        }
 })
 
 userSchema.pre('save', function (next) {

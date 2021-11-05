@@ -5,6 +5,7 @@ const suggestion = require ('../models/suggestion')
 const visitor = require ('../models/visitor')
 const payment = require ('../models/payment')
 const upload = require('../middleware/upload')
+const pet = require ('../models/pet')
 const router = express.Router()
 
 router.get('/', (req, res) => {
@@ -24,6 +25,8 @@ router.post('/addSuggestion', actions.addNewSuggestion)
 router.post('/addVisitor', actions.addNewVisitor)
 
 router.post('/addPayment', upload.single('proofPayment'), actions.addPayment)
+
+router.post ('/addPet', actions.addPet)
 
 
 
