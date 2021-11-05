@@ -39,7 +39,12 @@ var userSchema = new Schema({
     pets: {
         type: Array,
         default: []
-        }
+        },
+        
+    cars: {
+        type: Array,
+        default: []
+    }
 })
 
 userSchema.pre('save', function (next) {

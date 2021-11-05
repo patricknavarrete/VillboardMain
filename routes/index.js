@@ -28,6 +28,8 @@ router.post('/addPayment', upload.single('proofPayment'), actions.addPayment)
 
 router.post ('/addPet', actions.addPet)
 
+router.post ('/addCar', actions.addCar)
+
 
 
 

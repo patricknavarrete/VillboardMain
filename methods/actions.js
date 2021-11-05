@@ -4,6 +4,7 @@ var Visitor = require ('../models/visitor')
 var Payment = require ('../models/payment')
 var Upload = require ('../middleware/upload')
 var Pet = require ('../models/pet')
+var Car = require ('../models/car')
 var jwt = require('jwt-simple')
 var config = require('../config/dbconfig')
 var bcrypt = require('bcrypt')
@@ -89,6 +90,63 @@ var functions = {
             console.log(userPet)
 
             userPet.save(function(err,userPet){
+                if (err){
+                    res.json({success: false, msg: 'Failed to save Pet'})
+                }
+                else {
+                    res.json({success: true, msg: 'Successfully AddedPet'})
+                }
+            })
+
+        }
+
+        
+    },
+
+
+    addCar: async function async (req,res){
+        if ((!req.body.cFirstName) ||
+        (!req.body.cLastName) ||
+        (!req.body.cAddress) ||
+        (!req.body.cPhoneNumber)||
+        (!req.body.vehicleModel)||
+        (!req.body.plateNumber)
+         )
+        {
+            res.json ({success: false, msg: 'please enter your report'})
+        } 
+        else {
+            var newCar = Car({
+                cFirstName: req.body.cFirstName,
+                cLastName : req.body.cLastName,
+                cAddress : req.body.cAddress,
+                cPhoneNumber : req.body.cPhoneNumber,
+                vehicleModel: req.body.vehicleModel,
+                plateNumber: req.body.plateNumber,
+                cEmail: req.body.cEmail,
+            });
+
+            newCar.save()
+
+            // User.aggregate([{ 
+            //     $lookup: {
+            //      from: 'User',
+            //      localField: 'pets_Id',
+            //      foreignField: 'pets_Id',
+            //      as: 'pets'
+            //     }},
+            //     { 
+            //      $unwind: '$pets'
+            //     }
+            //    ]);
+
+           const userCar = await User.findOne ({
+                email: req.body.email
+           })
+            userCar.cars.push (mongoose.Types.ObjectId(newCar._id))
+            console.log(userCar)
+
+            userCar.save(function(err,userCar){
                 if (err){
                     res.json({success: false, msg: 'Failed to save Pet'})
                 }
