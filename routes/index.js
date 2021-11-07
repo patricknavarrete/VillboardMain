@@ -8,9 +8,7 @@ const upload = require('../middleware/upload')
 const pet = require ('../models/pet')
 const router = express.Router()
 
-const cors = require('cors')
-const app = express()
-app.use(cors())
+
 
 
 
