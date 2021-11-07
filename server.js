@@ -14,22 +14,6 @@ if (process.env.NODE_ENV === 'development') {
     app.use(morgan('dev'))
 }
 
-app.use(cors());
-
-const corsOpts = {
-    origin: '*',
-  
-    methods: [
-      'GET',
-      'POST',
-    ],
-  
-    allowedHeaders: [
-      'Content-Type',
-    ],
-  };
-  
-  app.use(cors(corsOpts));
 
 app.use((req, res, next) => {
     res.header('Access-Control-Allow-Origin', '*');
@@ -38,13 +22,7 @@ app.use((req, res, next) => {
     next();
   });
 
-  app.use(
-      cors({
-    origin: "*",
-    methods: ["GET","POST","DELETE","PUT"],
-    credentials: true,
-})
-)
+ 
 
 app.use(bodyParser.urlencoded({ extended: false }))
 app.use(bodyParser.json())

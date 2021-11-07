@@ -66,7 +66,7 @@ var functions = {
                 pPhoneNumber : req.body.pPhoneNumber,
                 petName: req.body.petName,
                 petBreed: req.body.petBreed,
-                pEmail: req.body.pEmail,
+                email: req.body.email,
             });
 
             newPet.save()
@@ -123,7 +123,7 @@ var functions = {
                 cPhoneNumber : req.body.cPhoneNumber,
                 vehicleModel: req.body.vehicleModel,
                 plateNumber: req.body.plateNumber,
-                cEmail: req.body.cEmail,
+                email: req.body.email,
             });
 
             newCar.save()
@@ -309,7 +309,29 @@ var functions = {
     },
 
     postVisitors: function (req,res){
-        Visitor.find({}, function(err, documents){
+        Visitor.find({}, function(err,documents){
+            if(err){
+                res.send('Something went wrong');
+            }
+            else {
+                res.send(documents);
+            }
+        })
+    },
+
+    postPet: function (req,res){
+        Pet.find({}, function(err,documents){
+            if(err){
+                res.send('Something went wrong');
+            }
+            else {
+                res.send(documents);
+            }
+        })
+    },
+
+    postCar: function (req,res){
+        Car.find({}, function(err, documents){
             if(err){
                 res.send('Something went wrong');
             }

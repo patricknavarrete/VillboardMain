@@ -6,6 +6,7 @@ const visitor = require ('../models/visitor')
 const payment = require ('../models/payment')
 const upload = require('../middleware/upload')
 const pet = require ('../models/pet')
+const car = require ('../models/pet')
 const router = express.Router()
 
 
