@@ -8,6 +8,12 @@ const upload = require('../middleware/upload')
 const pet = require ('../models/pet')
 const router = express.Router()
 
+const cors = require('cors')
+const app = express()
+app.use(cors())
+
+
+
 router.get('/', (req, res) => {
     res.send('Hello World')
 })
@@ -52,6 +58,10 @@ router.post('/postPayment', actions.postPayment)
 router.post('/deleteDataUser', actions.deleteDataUser)
 
 router.get('/checkEmail/:email', actions.checkEmail)
+
+router.get('/user/pet',function (req, res, next){
+    petCollections.aggregate
+})
 
 router.post('/changepass', actions.changepass)
 
