@@ -128,17 +128,6 @@ var functions = {
 
             newCar.save()
 
-            // User.aggregate([{ 
-            //     $lookup: {
-            //      from: 'User',
-            //      localField: 'pets_Id',
-            //      foreignField: 'pets_Id',
-            //      as: 'pets'
-            //     }},
-            //     { 
-            //      $unwind: '$pets'
-            //     }
-            //    ]);
 
            const userCar = await User.findOne ({
                 email: req.body.email
@@ -148,10 +137,10 @@ var functions = {
 
             userCar.save(function(err,userCar){
                 if (err){
-                    res.json({success: false, msg: 'Failed to save Pet'})
+                    res.json({success: false, msg: 'Failed to save Car'})
                 }
                 else {
-                    res.json({success: true, msg: 'Successfully AddedPet'})
+                    res.json({success: true, msg: 'Successfully AddedCar'})
                 }
             })
 
