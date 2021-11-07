@@ -47,6 +47,10 @@ router.get('/getinfo', actions.getinfo)
 
 router.post('/postUserinfo', actions.postUserinfo)
 
+router.post('/postPet', actions.postPet)
+
+router.post('/postCar', actions.postCar)
+
 router.post('/postSuggestion', actions.postSuggestions)
 
 router.post('/postVisitor', actions.postVisitors)
