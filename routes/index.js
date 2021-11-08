@@ -35,6 +35,7 @@ router.post ('/addPet', actions.addPet)
 
 router.post ('/addCar', actions.addCar)
 
+router.post ('/addPost',upload.single('postPicture'),actions.addPost)
 
 
 

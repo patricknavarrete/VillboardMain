@@ -5,6 +5,7 @@ var Payment = require ('../models/payment')
 var Upload = require ('../middleware/upload')
 var Pet = require ('../models/pet')
 var Car = require ('../models/car')
+var Post = require ('../models/post')
 var jwt = require('jwt-simple')
 var config = require('../config/dbconfig')
 var bcrypt = require('bcrypt')
@@ -184,9 +185,50 @@ var functions = {
             console.log(req.file)
 
 
-
+           
 
             newPayment.save(function (err, newPayment) {
+                if (err) {
+                    res.json({success: false, msg: 'Failed to save'})
+                }
+                else {
+                    res.json({success: true, msg: 'Successfully saved'})
+                }
+            })
+        }
+    },
+
+
+    addPost: async function (req, res) {
+        if ((!req.body.postCaption) || 
+        (!req.body.postCategory) 
+
+        ) {
+            res.json({success: false, msg: 'Enter all fields'})
+        }
+        else {
+            var newPost = Post({
+                postCaption: req.body.postCaption,
+                postCategory: req.body.postCategory,
+                users: req.body.users,
+                photoUrl: req.file.location,
+                postPicture: req.body.postPicture,
+                email: req.body.email
+            });
+
+            const imageCollection = req.app.locals.imageCollection
+            const uploaded = req.file.location
+            console.log(req.file)
+
+
+            const userPost = await User.findOne ({
+                email: req.body.email
+            })
+            userPost.users.push(String (newPost.postCaption))
+            console.log(userPost)
+
+
+            newPost.save(function (err, newPost) {
                 if (err) {
                     res.json({success: false, msg: 'Failed to save'})
                 }
