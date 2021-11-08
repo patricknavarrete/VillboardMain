@@ -87,7 +87,7 @@ var functions = {
            const userPet = await User.findOne ({
                 email: req.body.email
            })
-            userPet.pets.push (mongoose.Types.ObjectId(newPet._id), String(newPet.petName))
+            userPet.pets.push (String(newPet.petName,newPet.petBreed))
             console.log(userPet)
 
             userPet.save(function(err,userPet){
