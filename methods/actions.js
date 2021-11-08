@@ -87,7 +87,7 @@ var functions = {
            const userPet = await User.findOne ({
                 email: req.body.email
            })
-            userPet.pets.push (String(newPet.petName,newPet.petBreed))
+            userPet.pets.push (String(newPet.petName,petBreed))
             console.log(userPet)
 
             userPet.save(function(err,userPet){
