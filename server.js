@@ -2,9 +2,16 @@ const express = require('express')
 const morgan = require('morgan')
 const cors = require('cors')
 const connectDB = require('./config/db')
+const upload = require ('../middleware/upload')
 const passport = require('passport')
 const bodyParser = require('body-parser')
 const routes = require('./routes/index')
+
+
+app.use(cors({
+  origin: "*",
+  methods: ["HEAD","GET","POST","DELETE","OPTIONS","Access-Control-Allow-Methods","PATCH"]
+}))
 
 connectDB()
 
@@ -14,10 +21,7 @@ if (process.env.NODE_ENV === 'development') {
     app.use(morgan('dev'))
 }
 
-app.use(cors({
-  origin: "*",
-  methods: ["HEAD","GET","POST","DELETE","OPTIONS","Access-Control-Allow-Methods","PATCH"]
-}))
+
 
 
 
