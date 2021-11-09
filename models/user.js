@@ -36,7 +36,7 @@ var userSchema = new Schema({
         require: true,
         default: 'homeowners'
     },
-    pets: {
+    petField: {
         type: Array,
         default: []
         },

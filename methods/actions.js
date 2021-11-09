@@ -72,23 +72,91 @@ var functions = {
 
             newPet.save()
 
-            // User.aggregate([{ 
-            //     $lookup: {
-            //      from: 'User',
-            //      localField: 'pets_Id',
-            //      foreignField: 'pets_Id',
-            //      as: 'pets'
-            //     }},
-            //     { 
-            //      $unwind: '$pets'
-            //     }
-            //    ]);
+        //    const userPet = await User.findOne ({
+        //         email: req.body.email
+        //    })
+        const userPet = await User.findOneAndUpdate(
 
-           const userPet = await User.findOne ({
-                email: req.body.email
-           })
-            userPet.pets.push (String(newPet.petName,petBreed))
-            console.log(userPet)
+            { email: req.body.email },
+            
+            {
+            
+            $push: {
+            
+            petField: {
+            
+            pFirstName: req.body.pFirstName,
+            
+            pLastName: req.body.pLastName,
+            
+            pAddress: req.body.pAddress,
+            
+            pPhoneNumber: req.body.pPhoneNumber,
+            
+            petName: req.body.petName,
+            
+            petBreed: req.body.petBreed,
+            
+            email: req.body.email,
+            
+            },
+            
+            },
+            
+            }
+            
+            );
+        //    const userPet = await User.findOne(
+
+        //     { email: req.body.email },
+        //     {
+        //       push: {
+        //         petField: {
+        //           pFirstName: req.body.pFirstName,
+        //           pLastName: req.body.pLastName,
+        //           pAddress: req.body.pAddress,
+        //           pPhoneNumber: req.body.pPhoneNumber,
+        //           petName: req.body.petName,
+        //           petBreed: req.body.petBreed,
+        //           email: req.body.email,
+        //         },
+        //       },
+        //     }
+        //   );
+            // userPet.pets.push (mongoose.Types.ObjectId(newPet._id)),
+
+            //  User.aggregate([
+            //     {
+            //         "$lookup": {
+            //             from: 'pets',
+            //             localField: 'userPet',
+            //             foreignField: 'pets',
+            //             as: 'petField'
+            //           }
+            //     },
+            //     {$unwind : 'petField'}
+            // ]),
+
+        //    User.aggregate([
+        //         {
+        //         "$lookup": {
+        //         from: 'pets',
+        //         localField: 'users',
+        //         foreignField: 'pets',
+        //         as: 'pets'
+        //         }
+        //         },
+        //         {$unwind : 'pets'},
+        //         {$push: {'pets': { pFirstName: req.body.pFirstName,
+        //         pLastName : req.body.pLastName,
+        //         pAddress : req.body.pAddress,
+        //         pPhoneNumber : req.body.pPhoneNumber,
+        //         petName: req.body.petName,
+        //         petBreed: req.body.petBreed,
+        //         email: req.body.email}}}
+        //         ]),
+
+            console.log(userPet),
 
             userPet.save(function(err,userPet){
                 if (err){
@@ -100,7 +168,6 @@ var functions = {
             })
 
         }
-
         
     },
 
