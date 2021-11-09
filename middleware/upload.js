@@ -12,7 +12,7 @@ aws.config.loadFromPath('./config.json')
 const s3= new aws.S3({apiVersion:'2006-03-01',
     AWS_ACCESS_KEY: process.env.AWS_ACCESS_KEY_ID,
     AWS_SECRET_KEY: process.env.AWS_SECRET_ACCESS_KEY,
-    AWS_REGION:process.env.AWS_REGION});
+    AWS_REGION: process.env.AWS_REGION});
 
 
 

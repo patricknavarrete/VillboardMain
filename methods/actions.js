@@ -209,13 +209,9 @@ var functions = {
 
         ) {
             res.json({success: false, msg: 'Enter all fields'})
-            const userPost = await User.findOne ({
-                email: req.body.email
-            })
         }
         else {
             var newPost = Post({
-                firstName: req.decodedtoken.fistName,
                 postCaption: req.body.postCaption,
                 postCategory: req.body.postCategory,
                 photoUrl: req.file.location,
@@ -227,9 +223,22 @@ var functions = {
             const uploaded = req.file.location
             console.log(req.file)
 
+             const userPost = await User.findOneAndUpdate(
+                { email: req.body.email }, 
+                {
+                 $push: {
+                 postField: {
+                 email: req.body.email,
+                 },
+                 },
+                 }
+                 );
+                 console.log(userPost),
 
 
-      
+            // const userPost = await User.findOne ({
+            //     email: req.body.email
+            // })
             // userPost.users.push(String (newPost.postCaption))
             // console.log(userPost)
 
