@@ -417,9 +417,9 @@ var functions = {
             }
             else {
                 res.send(documents);
-                const imageCollection = req.app.locals.imageCollection;
-                imageCollection.find({})
-                .toArray()
+                // const imageCollection = req.app.locals.imageCollection;
+                // imageCollection.find({})
+                // .toArray()
             }
         })
     },
