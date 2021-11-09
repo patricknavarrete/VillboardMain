@@ -145,12 +145,30 @@ var functions = {
 
             newCar.save()
 
+            const userCar = await User.findOneAndUpdate(
 
-           const userCar = await User.findOne ({
-                email: req.body.email
-           })
-            userCar.cars.push (mongoose.Types.ObjectId(newCar._id))
-            console.log(userCar)
+                { email: req.body.email }, 
+                {
+                $push: {
+                carField: {
+                cFirstName: req.body.cFirstName,
+                cLastName : req.body.cLastName,
+                cAddress : req.body.cAddress,
+                cPhoneNumber : req.body.cPhoneNumber,
+                vehicleModel: req.body.vehicleModel,
+                plateNumber: req.body.plateNumber,
+                email: req.body.email,
+                },
+                },
+                }
+                );
+
+
+        //    const userCar = await User.findOne ({
+        //         email: req.body.email
+        //    })
+        //     userCar.cars.push (mongoose.Types.ObjectId(newCar._id))
+        //     console.log(userCar)
 
             userCar.save(function(err,userCar){
                 if (err){
