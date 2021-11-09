@@ -8,8 +8,20 @@ var Car = require ('../models/car')
 var Post = require ('../models/post')
 var jwt = require('jwt-simple')
 var config = require('../config/dbconfig')
+const cors = require('cors')
 var bcrypt = require('bcrypt')
 var mongoose = require('mongoose')
+
+const express = require('express')
+
+const app = express()
+
+app.use(function(req,res,next){
+  res.header("Access-Control-Allow-Origin", "*");
+  res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept","Access-Control-Allow-Credentials","Access-Control-Expose-Headers","Access-Control-Max-Age","Access-Control-Allow-Methods","Access-Control-Request-Method","Access-Control-Request-Headers","OPTIONS");
+  next();
+})
+app.use(cors());
 
 
 var functions = {
