@@ -7,17 +7,7 @@ const payment = require ('../models/payment')
 const upload = require('../middleware/upload')
 const pet = require ('../models/pet')
 const car = require ('../models/pet')
-const cors = require('cors')
 const router = express.Router()
-
-const app = express()
-
-app.use(function(req,res,next){
-    res.header("Access-Control-Allow-Origin", "*");
-    res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
-    next();
-  })
-  app.use(cors());
 
 
 
