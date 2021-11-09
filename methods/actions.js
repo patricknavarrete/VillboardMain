@@ -77,84 +77,21 @@ var functions = {
         //    })
         const userPet = await User.findOneAndUpdate(
 
-            { email: req.body.email },
-            
+            { email: req.body.email }, 
             {
-            
             $push: {
-            
             petField: {
-            
             pFirstName: req.body.pFirstName,
-            
             pLastName: req.body.pLastName,
-            
             pAddress: req.body.pAddress,
-            
             pPhoneNumber: req.body.pPhoneNumber,
-            
             petName: req.body.petName,
-            
             petBreed: req.body.petBreed,
-            
             email: req.body.email,
-            
             },
-            
             },
-            
             }
-            
             );
-        //    const userPet = await User.findOne(
-
-        //     { email: req.body.email },
-        //     {
-        //       push: {
-        //         petField: {
-        //           pFirstName: req.body.pFirstName,
-        //           pLastName: req.body.pLastName,
-        //           pAddress: req.body.pAddress,
-        //           pPhoneNumber: req.body.pPhoneNumber,
-        //           petName: req.body.petName,
-        //           petBreed: req.body.petBreed,
-        //           email: req.body.email,
-        //         },
-        //       },
-        //     }
-        //   );
-            // userPet.pets.push (mongoose.Types.ObjectId(newPet._id)),
-
-            //  User.aggregate([
-            //     {
-            //         "$lookup": {
-            //             from: 'pets',
-            //             localField: 'userPet',
-            //             foreignField: 'pets',
-            //             as: 'petField'
-            //           }
-            //     },
-            //     {$unwind : 'petField'}
-            // ]),
-
-        //    User.aggregate([
-        //         {
-        //         "$lookup": {
-        //         from: 'pets',
-        //         localField: 'users',
-        //         foreignField: 'pets',
-        //         as: 'pets'
-        //         }
-        //         },
-        //         {$unwind : 'pets'},
-        //         {$push: {'pets': { pFirstName: req.body.pFirstName,
-        //         pLastName : req.body.pLastName,
-        //         pAddress : req.body.pAddress,
-        //         pPhoneNumber : req.body.pPhoneNumber,
-        //         petName: req.body.petName,
-        //         petBreed: req.body.petBreed,
-        //         email: req.body.email}}}
-        //         ]),
 
             console.log(userPet),
 
@@ -266,18 +203,21 @@ var functions = {
     },
 
 
-    addPost: async function (req, res) {
+    addPost: async function  (req, res) {
         if ((!req.body.postCaption) || 
         (!req.body.postCategory) 
 
         ) {
             res.json({success: false, msg: 'Enter all fields'})
+            const userPost = await User.findOne ({
+                email: req.body.email
+            })
         }
         else {
             var newPost = Post({
+                firstName: req.decodedtoken.fistName,
                 postCaption: req.body.postCaption,
                 postCategory: req.body.postCategory,
-                users: req.body.users,
                 photoUrl: req.file.location,
                 postPicture: req.body.postPicture,
                 email: req.body.email
@@ -288,11 +228,10 @@ var functions = {
             console.log(req.file)
 
 
-            const userPost = await User.findOne ({
-                email: req.body.email
-            })
-            userPost.users.push(String (newPost.postCaption))
-            console.log(userPost)
+
+      
+            // userPost.users.push(String (newPost.postCaption))
+            // console.log(userPost)
 
 
             newPost.save(function (err, newPost) {

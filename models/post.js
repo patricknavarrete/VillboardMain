@@ -18,7 +18,7 @@ var postSchema = new Schema({
         data: Buffer,
         contentType: String
     },
-    users: {
+    postField: {
         type: Array,
         default: []
     }
