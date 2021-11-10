@@ -6,6 +6,7 @@ var Upload = require ('../middleware/upload')
 var Pet = require ('../models/pet')
 var Car = require ('../models/car')
 var Post = require ('../models/post')
+var Reservation = require ('../models/reservation')
 var jwt = require('jwt-simple')
 var config = require('../config/dbconfig')
 const cors = require('cors')
@@ -336,6 +337,42 @@ var functions = {
                 })
             }
         },
+
+        addReservation: function (req, res) {
+            if ((!req.body.rFirstName) ||   
+            (!req.body.rLastName) || 
+            (!req.body.rAddress) ||
+            (!req.body.rPhoneNumber ) || 
+            (!req.body.venue) ||
+            (!req.body.reservationTime) ||
+            (!req.body.reservationDate)
+            ) {
+                res.json({success: false, msg: 'Enter all fields'})
+            }
+            else {
+                var newReservation = Reservation ({
+                    rFirstName: req.body.rFirstName,
+                    rLastName: req.body.rLastName,
+                    rAddress: req.body.rAddress,
+                    rPhoneNumber: req.body.rPhoneNumber,
+                    venue: req.body.venue,
+                    reservationTime: req.body.reservationTime,
+                    reservationDate: req.body.reservationDate,                
+                });
+                newReservation.save(function (err, newReservation) {
+                    if (err) {
+                        res.json({success: false, msg: 'Failed to save'})
+                    }
+                    else {
+                        res.json({success: true, msg: 'Successfully saved'})
+                    }
+                })
+            }
+        },
+
+     
+
+        
 
     
     authenticate: function (req, res) {
