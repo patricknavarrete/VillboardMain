@@ -209,6 +209,8 @@ var functions = {
             const uploaded = req.file.location
             console.log(req.file)
 
+            newPayment.save()
+
             const userPayment = await User.findOneAndUpdate(
 
                 { email: req.body.email }, 
