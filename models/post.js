@@ -18,6 +18,9 @@ var postSchema = new Schema({
         data: Buffer,
         contentType: String
     },
+    // email: {
+    //     type: String,
+    // },
     postField: {
         type: Array,
         default: []

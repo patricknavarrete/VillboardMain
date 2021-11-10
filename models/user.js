@@ -3,6 +3,13 @@ var Schema = mongoose.Schema;
 var bcrypt = require('bcrypt')
 var userSchema = new Schema({
     userID_id: Schema.Types.ObjectId,
+    photoUrlProfile:{
+        type: String,
+    },
+    profilePicture: {
+        data: Buffer,
+        contentType: String
+    },
     email: {
         type: String,
         require: true
@@ -44,7 +51,16 @@ var userSchema = new Schema({
     carField: {
         type: Array,
         default: []
+    },
+    paymentField:{
+        type: Array,
+        default:[]
+    },
+    reservationField:{
+        type: Array,
+        default:[]
     }
+
 })
 
 userSchema.pre('save', function (next) {

@@ -39,6 +39,8 @@ var functions = {
         }
         else {
             var newUser = User({
+                photoUrlProfile: req.file.location,
+                profilePicture: req.body.profilePicture,
                 email: req.body.email,
                 firstName: req.body.firstName,
                 lastName: req.body.lastName,
@@ -84,9 +86,6 @@ var functions = {
 
             newPet.save()
 
-        //    const userPet = await User.findOne ({
-        //         email: req.body.email
-        //    })
         const userPet = await User.findOneAndUpdate(
 
             { email: req.body.email }, 
@@ -148,6 +147,7 @@ var functions = {
             const userCar = await User.findOneAndUpdate(
 
                 { email: req.body.email }, 
+
                 {
                 $push: {
                 carField: {
@@ -162,13 +162,6 @@ var functions = {
                 },
                 }
                 );
-
-
-        //    const userCar = await User.findOne ({
-        //         email: req.body.email
-        //    })
-        //     userCar.cars.push (mongoose.Types.ObjectId(newCar._id))
-        //     console.log(userCar)
 
             userCar.save(function(err,userCar){
                 if (err){
@@ -189,7 +182,7 @@ var functions = {
 
 
 
-    addPayment: function (req, res) {
+    addPayment: async function (req, res) {
         if ((!req.body.uFirstName) || 
         (!req.body.uLastName) ||  
         (!req.body.uAddress) || 
@@ -218,10 +211,29 @@ var functions = {
             const uploaded = req.file.location
             console.log(req.file)
 
+            const userPayment = await User.findOneAndUpdate(
+
+                { email: req.body.email }, 
+
+                {
+                $push: {
+                paymentField: {
+                cFirstName: req.body.cFirstName,
+                cLastName : req.body.cLastName,
+                cAddress : req.body.cAddress,
+                cPhoneNumber : req.body.cPhoneNumber,
+                vehicleModel: req.body.vehicleModel,
+                plateNumber: req.body.plateNumber,
+                email: req.body.email,
+                },
+                },
+                }
+                );
+
 
            
 
-            newPayment.save(function (err, newPayment) {
+                userPayment.save(function (err, userPayment) {
                 if (err) {
                     res.json({success: false, msg: 'Failed to save'})
                 }
@@ -241,37 +253,22 @@ var functions = {
             res.json({success: false, msg: 'Enter all fields'})
         }
         else {
-            var newPost = Post({
+            const userInform = await User.findOne (
+                {email: req.body.email});
+            var newPost = Post(
+                {
                 postCaption: req.body.postCaption,
                 postCategory: req.body.postCategory,
                 photoUrl: req.file.location,
                 postPicture: req.body.postPicture,
-                email: req.body.email
+                postField: {email: userInform.email,
+                            firstName: userInform.firstName},
             });
 
             const imageCollection = req.app.locals.imageCollection
             const uploaded = req.file.location
             console.log(req.file)
-
-             const userPost = await User.findOneAndUpdate(
-                { email: req.body.email }, 
-                {
-                 $push: {
-                 postField: {
-                 email: req.body.email,
-                 },
-                 },
-                 }
-                 );
-                 console.log(userPost),
-
-
-            // const userPost = await User.findOne ({
-            //     email: req.body.email
-            // })
-            // userPost.users.push(String (newPost.postCaption))
-            // console.log(userPost)
-
+    
 
             newPost.save(function (err, newPost) {
                 if (err) {
@@ -384,6 +381,17 @@ var functions = {
         })
     },
 
+    postAnnouncement: function(req,res){
+        Post.find({}, function(err,documents){
+            if(err){
+                res.send('Something went wrong');
+            }
+            else{
+                res.send(documents);
+            }
+        })
+    },
+
     postSuggestions: function (req,res){
         Suggestion.find({}, function(err,documents){
             if(err){
@@ -435,9 +443,7 @@ var functions = {
             }
             else {
                 res.send(documents);
-                // const imageCollection = req.app.locals.imageCollection;
-                // imageCollection.find({})
-                // .toArray()
+
             }
         })
     },

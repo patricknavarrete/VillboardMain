@@ -7,6 +7,7 @@ const payment = require ('../models/payment')
 const upload = require('../middleware/upload')
 const pet = require ('../models/pet')
 const car = require ('../models/pet')
+const post = require ('../models/post')
 const router = express.Router()
 
 
@@ -23,7 +24,7 @@ router.get('/dashboard', (req, res) => {
 
 //@desc Adding new user
 //@route POST /adduser
-router.post('/adduser', actions.addNew)
+router.post('/adduser', upload.single('profilePicture'),actions.addNew)
 
 router.post('/addSuggestion', actions.addNewSuggestion)
 
@@ -48,6 +49,8 @@ router.post('/authenticate', actions.authenticate)
 router.get('/getinfo', actions.getinfo)
 
 router.post('/postUserinfo', actions.postUserinfo)
+
+router.post('/postAnnouncement', actions.postAnnouncement)
 
 router.post('/postPet', actions.postPet)
 
