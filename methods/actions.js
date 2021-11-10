@@ -261,7 +261,8 @@ var functions = {
                 postCategory: req.body.postCategory,
                 photoUrl: req.file.location,
                 postPicture: req.body.postPicture,
-                postField: {email: userInform.email,
+                postField: {photoUrlProfile: userInform.photoUrlProfile,
+                            email: userInform.email,
                             firstName: userInform.firstName},
             });
 
