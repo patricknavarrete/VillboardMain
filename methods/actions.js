@@ -216,12 +216,13 @@ var functions = {
                 {
                 $push: {
                 paymentField: {
-                cFirstName: req.body.cFirstName,
-                cLastName : req.body.cLastName,
-                cAddress : req.body.cAddress,
-                cPhoneNumber : req.body.cPhoneNumber,
-                vehicleModel: req.body.vehicleModel,
-                plateNumber: req.body.plateNumber,
+                uFirstName: req.body.uFirstName,
+                uLastName: req.body.uLastName,
+                uAddress: req.body.uAddress,
+                uPhoneNumber: req.body.uPhoneNumber,
+                refNumber: req.body.refNumber,
+                typeTransaction: req.body.typeTransaction,
+                photoUrl: req.file.location,
                 email: req.body.email,
                 },
                 },
