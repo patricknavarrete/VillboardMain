@@ -359,6 +359,9 @@ var functions = {
                     reservationTime: req.body.reservationTime,
                     reservationDate: req.body.reservationDate,                
                 });
+
+            
+
                 newReservation.save(function (err, newReservation) {
                     if (err) {
                         res.json({success: false, msg: 'Failed to save'})
@@ -504,6 +507,7 @@ var functions = {
                 }
             })
         },
+
 
         checkEmail: function (req,res){
             User.findOne({email:req.params.email}, (err,result) => {
