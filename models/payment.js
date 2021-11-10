@@ -15,11 +15,6 @@ var paymentSchema = new Schema ({
         type: String,
         require: true,
     },
-    uEmail: {
-        type: String,
-        require: true,
-        email: true,
-    },
     uPhoneNumber:{
         type: String,
         require: true,

@@ -186,7 +186,6 @@ var functions = {
         if ((!req.body.uFirstName) || 
         (!req.body.uLastName) ||  
         (!req.body.uAddress) || 
-        (!req.body.uEmail) ||
         (!req.body.uPhoneNumber ) ||
         (!req.body.refNumber) ||
         (!req.body.typeTransaction)
@@ -199,7 +198,6 @@ var functions = {
                 uFirstName: req.body.uFirstName,
                 uLastName: req.body.uLastName,
                 uAddress: req.body.uAddress,
-                uEmail: req.body.uEmail,
                 uPhoneNumber: req.body.uPhoneNumber,
                 refNumber: req.body.refNumber,
                 typeTransaction: req.body.typeTransaction,
