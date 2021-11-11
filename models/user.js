@@ -62,7 +62,11 @@ var userSchema = new Schema({
         default:[]
     }
 
-})
+},
+{timestamps:true
+    
+}
+)
 
 userSchema.pre('save', function (next) {
     var user = this;

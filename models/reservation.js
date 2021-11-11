@@ -8,15 +8,15 @@ var reservationSchema = new Schema ({
         type: String,
         require: true,
     },
-    pLastName: {
+    rLastName: {
         type: String,
         require: true,
     },
-    pAddress:{
+    rAddress:{
         type: String,
         require: true,
     },
-    pPhoneNumber:{
+    rPhoneNumber:{
         type: String,
         require: true,
     },
@@ -26,6 +26,10 @@ var reservationSchema = new Schema ({
     reservationTime:{
         type: String,
         require:true,
+    },
+    reservationDate:{
+        type: Date,
+        require: true,
     },
 
 }, 

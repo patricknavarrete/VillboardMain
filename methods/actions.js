@@ -7,6 +7,7 @@ var Pet = require ('../models/pet')
 var Car = require ('../models/car')
 var Post = require ('../models/post')
 var Reservation = require ('../models/reservation')
+var nodemailer = require ('../middleware/nodemailer');
 var jwt = require('jwt-simple')
 var config = require('../config/dbconfig')
 const cors = require('cors')
@@ -229,12 +230,32 @@ var functions = {
                 email: req.body.email,
                 },
                 },
+                },
+                {
+
+                let:transporter = nodemailer.createTransport({
+                    host: "hotmail",
+                    auth: {
+                      user: "villboard@outlook.com", 
+                      pass: "boardVill123", 
+                    },
+                  }),
+                
+                 const : msg = await transporter.sendMail({
+                    from: "Villa Caceres" , 
+                    to: "{email}", 
+                    subject: "Hello ✔", 
+                    text: "Hello world?", 
+                    html: "<b>Hello world?</b>", // html body
+                  }),
                 }
-                );
+            );
 
 
-           
+            const info = await transporter.sendMail(msg)
 
+            console.log(info);
+            
                 userPayment.save(function (err, userPayment) {
                 if (err) {
                     res.json({success: false, msg: 'Failed to save'})
@@ -507,6 +528,22 @@ var functions = {
                 }
             })
         },
+
+        deleteUpdateUser: function (req,res){
+            User.findOneAndUpdate({
+                email:req.body.email
+            } , function(err){
+
+                if(err){
+                    res.send('Deleting Account Failed');
+                }
+                else{
+                    res.send('Document Deleted Successfully')
+                }
+            })
+        },
+
+        
 
 
         checkEmail: function (req,res){

@@ -28,6 +28,10 @@ var visitorSchema = new Schema ({
     }
 
     
-})
+},
+{timestamps:true
+    
+}
+)
 
 module.exports = mongoose.model('Visitor', visitorSchema)
