@@ -130,7 +130,7 @@ var functions = {
         (!req.body.petBreed)
          )
         {
-            res.json ({success: false, msg: 'please enter your report'})
+            res.json ({success: false, msg: 'please enter your Pet'})
         } 
         else {
             var newPet = Pet({
@@ -140,15 +140,20 @@ var functions = {
                 pPhoneNumber : req.body.pPhoneNumber,
                 petName: req.body.petName,
                 petBreed: req.body.petBreed,
-                pqrUrl: req.file.location,
-                petQRpicture: req.body.carQRpicture,
+                // photoUrlPet: req.file.location,
+                // petQRpicture: req.body.petQRpicture,
                 email: req.body.email,
             });
+
+            // const imageCollection = req.app.locals.imageCollection
+            // const uploaded = req.file.location
+            // console.log(req.file)
+
+            
 
             newPet.save()
 
         const userPet = await User.findOneAndUpdate(
-
             { email: req.body.email }, 
             {
             $push: {
@@ -159,16 +164,12 @@ var functions = {
             pPhoneNumber: req.body.pPhoneNumber,
             petName: req.body.petName,
             petBreed: req.body.petBreed,
-            petQRpicture: req.body.carQRpicture,
+            // photoUrlPet: req.file.location,
             email: req.body.email,
             },
             },
             }
             );
-
-            const imageCollection = req.app.locals.imageCollection
-            const uploaded = req.file.location
-            console.log(req.file)
 
             console.log(userPet),
 
@@ -205,14 +206,14 @@ var functions = {
                 cPhoneNumber : req.body.cPhoneNumber,
                 vehicleModel: req.body.vehicleModel,
                 plateNumber: req.body.plateNumber,
-                cqrUrl: req.file.location,
-                carQRpicture: req.body.carQRpicture,
-                email: req.body.email,
+                // cqrUrl: req.file.location,
+                // carQRpicture: req.body.carQRpicture,
+                email: req.body.email
             });
 
-            const imageCollection = req.app.locals.imageCollection
-            const uploaded = req.file.location
-            console.log(req.file)
+            // const imageCollection = req.app.locals.imageCollection
+            // const uploaded = req.file.location
+            // console.log(req.file)
 
             newCar.save()
 
@@ -229,6 +230,7 @@ var functions = {
                 cPhoneNumber : req.body.cPhoneNumber,
                 vehicleModel: req.body.vehicleModel,
                 plateNumber: req.body.plateNumber,
+                // cqrUrl: req.file.location,
                 email: req.body.email,
                 },
                 },

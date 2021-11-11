@@ -32,13 +32,13 @@ var carSchema = new Schema ({
         type: String,
         require:true,
     },
-    cqrUrl:{
-        type: String,
-    },
-    carQRpicture: {
-        data: Buffer,
-        contentType: String
-    },
+    // cqrUrl:{
+    //     type: String,
+    // },
+    // carQRpicture: {
+    //     data: Buffer,
+    //     contentType: String,
+    // }
 
 }, 
 

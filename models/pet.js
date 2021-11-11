@@ -28,17 +28,13 @@ var petSchema = new Schema ({
         type: String,
         require:true,
     },
-    pEmail:{
-        type: mongoose.Schema.Types.ObjectId,
-        ref:'User'
-    },
-    pqrUrl:{
+    photoUrlPet:{
         type: String,
     },
     petQRpicture: {
         data: Buffer,
-        contentType: String
-    },
+        contentType: String,
+    }
 
 
 }, 
