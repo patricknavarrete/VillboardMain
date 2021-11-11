@@ -7,6 +7,7 @@ var Pet = require ('../models/pet')
 var Car = require ('../models/car')
 var Post = require ('../models/post')
 var Reservation = require ('../models/reservation')
+var AddFamily = require ('../models/addFamily')
 var nodemailer = require ('../middleware/nodemailer');
 var jwt = require('jwt-simple')
 var config = require('../config/dbconfig')
@@ -41,8 +42,8 @@ var functions = {
         }
         else {
             var newUser = User({
-                photoUrlProfile: req.file.location,
-                profilePicture: req.body.profilePicture,
+                // photoUrlProfile: req.file.location,
+                // profilePicture: req.body.profilePicture,
                 email: req.body.email,
                 firstName: req.body.firstName,
                 lastName: req.body.lastName,
@@ -62,6 +63,62 @@ var functions = {
             })
         }
     },
+
+    addFamily: async function async (req,res){
+        if ((!req.body.aFirstName) ||
+        (!req.body.aLastName) ||
+        (!req.body.aEmail) ||
+        (!req.body.aPhoneNumber)||
+        (!req.body.Member)
+         )
+        {
+            res.json ({success: false, msg: 'Please Complete the form'})
+        } 
+        else {
+            var newFamily = AddFamily({
+                aFirstName: req.body.pFirstName,
+                aLastName : req.body.pLastName,
+                aEmail : req.body.aEmail,
+                aAddress: req.body.aAddress,
+                aPhoneNumber : req.body.aPhoneNumber,
+                Member: req.body.Member,
+            });
+
+            newFamily.save()
+
+        const userFamily = await User.findOneAndUpdate(
+
+            { email: req.body.email }, 
+            {
+            $push: {
+            familyField: {
+                aFirstName: req.body.pFirstName,
+                aLastName : req.body.pLastName,
+                aEmail : req.body.aEmail,
+                aAddress: req.body.aAddress,
+                aPhoneNumber : req.body.aPhoneNumber,
+                Member: req.body.Member,
+            },
+            },
+            }
+            );
+
+            console.log(userPet),
+
+            userFamily.save(function(err,userFamily){
+                if (err){
+                    res.json({success: false, msg: 'Failed to save Pet'})
+                }
+                else {
+                    res.json({success: true, msg: 'Successfully AddedPet'})
+                }
+            })
+
+        }
+        
+    },
+
+   
 
 
     addPet: async function async (req,res){
@@ -435,6 +492,18 @@ var functions = {
             }
         })
     },
+
+    postFamily: function(req,res){
+        AddFamily.find({}, function(err,documents){
+            if(err){
+                res.send('Something went wrong');
+            }
+            else{
+                res.send(documents);
+            }
+        })
+    },
+
 
     postAnnouncement: function(req,res){
         Post.find({}, function(err,documents){

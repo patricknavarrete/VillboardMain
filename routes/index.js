@@ -36,6 +36,8 @@ router.post ('/addPet', actions.addPet)
 
 router.post ('/addCar', actions.addCar)
 
+router.post ('/addFamily', actions.addFamily)
+
 router.post ('/addPost',upload.single('postPicture'),actions.addPost)
 
 
@@ -50,6 +52,8 @@ router.get('/getinfo', actions.getinfo)
 
 router.post('/postUserinfo', actions.postUserinfo)
 
+router.post('/postFamily', actions.postFamily)
+
 router.post('/postAnnouncement', actions.postAnnouncement)
 
 router.post('/postPet', actions.postPet)
@@ -59,6 +63,7 @@ router.post('/postCar', actions.postCar)
 router.post('/postSuggestion', actions.postSuggestions)
 
 router.post('/postVisitor', actions.postVisitors)
+
 
 router.post('/postPayment', actions.postPayment)
 
