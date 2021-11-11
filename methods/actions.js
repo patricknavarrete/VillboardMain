@@ -42,8 +42,6 @@ var functions = {
         }
         else {
             var newUser = User({
-                // photoUrlProfile: req.file.location,
-                // profilePicture: req.body.profilePicture,
                 email: req.body.email,
                 firstName: req.body.firstName,
                 lastName: req.body.lastName,
@@ -52,6 +50,8 @@ var functions = {
                 phoneNumber: req.body.phoneNumber,
                 password: req.body.password,
                 role: req.body.role,
+                photoUrlProfile: req.file.location,
+                profilePicture: req.body.profilePicture,
             });
             newUser.save(function (err, newUser) {
                 if (err) {
@@ -76,8 +76,8 @@ var functions = {
         } 
         else {
             var newFamily = AddFamily({
-                aFirstName: req.body.pFirstName,
-                aLastName : req.body.pLastName,
+                aFirstName: req.body.aFirstName,
+                aLastName : req.body.aLastName,
                 aEmail : req.body.aEmail,
                 aAddress: req.body.aAddress,
                 aPhoneNumber : req.body.aPhoneNumber,
@@ -103,14 +103,14 @@ var functions = {
             }
             );
 
-            console.log(userPet),
+            console.log(userFamily),
 
             userFamily.save(function(err,userFamily){
                 if (err){
-                    res.json({success: false, msg: 'Failed to save Pet'})
+                    res.json({success: false, msg: 'Failed to save Family Member'})
                 }
                 else {
-                    res.json({success: true, msg: 'Successfully AddedPet'})
+                    res.json({success: true, msg: 'Successfully Added Family Member'})
                 }
             })
 
