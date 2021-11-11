@@ -159,11 +159,16 @@ var functions = {
             pPhoneNumber: req.body.pPhoneNumber,
             petName: req.body.petName,
             petBreed: req.body.petBreed,
+            petQRpicture: req.body.carQRpicture,
             email: req.body.email,
             },
             },
             }
             );
+
+            const imageCollection = req.app.locals.imageCollection
+            const uploaded = req.file.location
+            console.log(req.file)
 
             console.log(userPet),
 
@@ -204,6 +209,10 @@ var functions = {
                 carQRpicture: req.body.carQRpicture,
                 email: req.body.email,
             });
+
+            const imageCollection = req.app.locals.imageCollection
+            const uploaded = req.file.location
+            console.log(req.file)
 
             newCar.save()
 
