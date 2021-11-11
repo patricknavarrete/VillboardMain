@@ -224,7 +224,7 @@ var functions = {
                 },
                 },
                 }
-                );
+                )
 
             userCar.save(function(err,userCar){
                 if (err){
@@ -289,21 +289,13 @@ var functions = {
                 refNumber: req.body.refNumber,
                 typeTransaction: req.body.typeTransaction,
                 photoUrl: req.file.location,
-                email: req.body.email,
-
-                },
-                
+                pPending: req.body.pPending,
+                email: req.body.email
                 },
                 },
-
-
+                },
     
-            );
-
-
-            const info = await transporter.sendMail(msg)
-
-            console.log(info);
+            )
             
                 userPayment.save(function (err, userPayment) {
                 if (err) {
@@ -432,8 +424,30 @@ var functions = {
                 });
 
 
+                const rDate = req.body.reservationDate
 
-            
+                const rTime = req.body.reservationTime
+
+
+                //  Reservation.findOne({reservationDate:req.body.reservationDate}, (err,result) => {
+                //         if(err) return res.status(500).json({msg:err});
+                //         if(result.reservationDate != rDate )
+                //  Reservation.findOne({reservationTime:req.body.reservationTime}, (err,result) => {
+                //         if(err) return res.status(500).json({msg:err});
+                //         if(result.reservationDate != rTime )
+                //                  {
+                //                     return res.json({
+                //                     Status: ("success" + true),
+                //                              });
+                //                             }
+                //                             else return res.json({
+                //                                 Status: ("already picked" + false),
+                //                             });
+                //                           } 
+                //                         );
+                //                     }
+                //                 )
+                    
 
                 newReservation.save(function (err, newReservation) {
                     if (err) {
@@ -631,7 +645,7 @@ var functions = {
             let {newpass, password} = req.body;
             newpass = newpass.trim();
             password = password.trim();
-           User.findOne({
+            User.findOne({
                 email:req.body.email
             },
             function (err, user){

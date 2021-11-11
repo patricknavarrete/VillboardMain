@@ -40,6 +40,8 @@ router.post ('/addFamily', actions.addFamily)
 
 router.post ('/addPost',upload.single('postPicture'),actions.addPost)
 
+router.post('/addReservation',actions.addReservation )
+
 
 
 //@desc Authenticate a user
