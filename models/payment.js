@@ -35,6 +35,11 @@ var paymentSchema = new Schema ({
         data: Buffer,
         contentType: String
     },
+    pPending: {
+        type: String,
+        require: true,
+        default: 'PENDING'
+    },
 }, 
 
 {timestamps:true

@@ -31,6 +31,11 @@ var reservationSchema = new Schema ({
         type: Date,
         require: true,
     },
+    rPending: {
+        type: String,
+        require: true,
+        default: 'PENDING'
+    },
 
 }, 
 

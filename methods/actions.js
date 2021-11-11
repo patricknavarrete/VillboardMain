@@ -265,7 +265,8 @@ var functions = {
                 refNumber: req.body.refNumber,
                 typeTransaction: req.body.typeTransaction,
                 photoUrl: req.file.location,
-                proofPayment: req.body.proofPayment
+                proofPayment: req.body.proofPayment,
+                pPending: req.body.pPending
             });
 
             const imageCollection = req.app.locals.imageCollection
@@ -289,6 +290,7 @@ var functions = {
                 typeTransaction: req.body.typeTransaction,
                 photoUrl: req.file.location,
                 email: req.body.email,
+
                 },
                 
                 },
@@ -425,7 +427,8 @@ var functions = {
                     rPhoneNumber: req.body.rPhoneNumber,
                     venue: req.body.venue,
                     reservationTime: req.body.reservationTime,
-                    reservationDate: req.body.reservationDate,                
+                    reservationDate: req.body.reservationDate,  
+                    rPending: req.body.rPending,             
                 });
 
 
