@@ -32,6 +32,14 @@ var petSchema = new Schema ({
         type: mongoose.Schema.Types.ObjectId,
         ref:'User'
     },
+    pqrUrl:{
+        type: String,
+    },
+    petQRpicture: {
+        data: Buffer,
+        contentType: String
+    },
+
 
 }, 
 

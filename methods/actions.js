@@ -83,6 +83,8 @@ var functions = {
                 pPhoneNumber : req.body.pPhoneNumber,
                 petName: req.body.petName,
                 petBreed: req.body.petBreed,
+                pqrUrl: req.file.location,
+                petQRpicture: req.body.carQRpicture,
                 email: req.body.email,
             });
 
@@ -141,6 +143,8 @@ var functions = {
                 cPhoneNumber : req.body.cPhoneNumber,
                 vehicleModel: req.body.vehicleModel,
                 plateNumber: req.body.plateNumber,
+                cqrUrl: req.file.location,
+                carQRpicture: req.body.carQRpicture,
                 email: req.body.email,
             });
 
@@ -229,26 +233,12 @@ var functions = {
                 photoUrl: req.file.location,
                 email: req.body.email,
                 },
-                },
-                },
-                {
-
-                let:transporter = nodemailer.createTransport({
-                    host: "hotmail",
-                    auth: {
-                      user: "villboard@outlook.com", 
-                      pass: "boardVill123", 
-                    },
-                  }),
                 
-                 const : msg = await transporter.sendMail({
-                    from: "Villa Caceres" , 
-                    to: "{email}", 
-                    subject: "Hello ✔", 
-                    text: "Hello world?", 
-                    html: "<b>Hello world?</b>", // html body
-                  }),
-                }
+                },
+                },
+
+
+    
             );
 
 
@@ -380,6 +370,8 @@ var functions = {
                     reservationTime: req.body.reservationTime,
                     reservationDate: req.body.reservationDate,                
                 });
+
+
 
             
 
