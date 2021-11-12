@@ -118,8 +118,6 @@ var functions = {
         
     },
 
-   
-
 
     addPet: async function async (req,res){
         if ((!req.body.pFirstName) ||
@@ -338,7 +336,8 @@ var functions = {
                 postPicture: req.body.postPicture,
                 postField: {photoUrlProfile: userInform.photoUrlProfile,
                             email: userInform.email,
-                            firstName: userInform.firstName},
+                            firstName: userInform.firstName,
+                            photoUrlProfile:req.file.location},
             });
 
             const imageCollection = req.app.locals.imageCollection
