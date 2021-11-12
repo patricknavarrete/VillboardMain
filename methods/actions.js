@@ -15,16 +15,16 @@ const cors = require('cors')
 var bcrypt = require('bcrypt')
 var mongoose = require('mongoose')
 
-const express = require('express')
+// const express = require('express')
 
-const app = express()
+// const app = express()
 
-app.use(function(req,res,next){
-  res.header("Access-Control-Allow-Origin", "*");
-  res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept","Access-Control-Allow-Credentials","Access-Control-Expose-Headers","Access-Control-Max-Age","Access-Control-Allow-Methods","Access-Control-Request-Method","Access-Control-Request-Headers","OPTIONS");
-  next();
-})
-app.use(cors());
+// app.use(function(req,res,next){
+//   res.header("Access-Control-Allow-Origin", "*");
+//   res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept","Access-Control-Allow-Credentials","Access-Control-Expose-Headers","Access-Control-Max-Age","Access-Control-Allow-Methods","Access-Control-Request-Method","Access-Control-Request-Headers","OPTIONS");
+//   next();
+// })
+// app.use(cors());
 
 
 var functions = {
@@ -537,16 +537,16 @@ var functions = {
         })
     },
 
-    // postReservation: function(req,res){
-    //     Reservation.find({}, function(err,documents){
-    //         if(err){
-    //             res.send('Something went wrong');
-    //         }
-    //         else{
-    //             res.send(documents);
-    //         }
-    //     })
-    // },
+    postReservation: function(req,res){
+        Reservation.find({}, function(err,documents){
+            if(err){
+                res.send('Something went wrong');
+            }
+            else{
+                res.send(documents);
+            }
+        })
+    },
 
     postFamily: function(req,res){
         AddFamily.find({}, function(err,documents){
