@@ -12,6 +12,10 @@ var petSchema = new Schema ({
         type: String,
         require: true,
     },
+    pEmail:{
+        type: mongoose.Schema.Types.ObjectId,
+        ref:'User'
+    },
     pAddress:{
         type: String,
         require: true,
@@ -28,13 +32,13 @@ var petSchema = new Schema ({
         type: String,
         require:true,
     },
-    photoUrlPet:{
-        type: String,
-    },
-    petQRpicture: {
-        data: Buffer,
-        contentType: String,
-    }
+    // photoUrlPet:{
+    //     type: String,
+    // },
+    // petQRpicture: {
+    //     data: Buffer,
+    //     contentType: String,
+    // }
 
 
 }, 

@@ -56,6 +56,8 @@ router.post('/postUserinfo', actions.postUserinfo)
 
 router.post('/postFamily', actions.postFamily)
 
+router.post('/postReservation', actions.postReservation)
+
 router.post('/postAnnouncement', actions.postAnnouncement)
 
 router.post('/postPet', actions.postPet)

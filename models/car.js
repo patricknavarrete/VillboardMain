@@ -32,7 +32,7 @@ var carSchema = new Schema ({
         type: String,
         require:true,
     },
-    // cqrUrl:{
+    // photoUrlCar:{
     //     type: String,
     // },
     // carQRpicture: {

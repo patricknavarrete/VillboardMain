@@ -33,7 +33,7 @@ var paymentSchema = new Schema ({
     },
     proofPayment: {
         data: Buffer,
-        contentType: String
+        contentType: String,
     },
     pPending: {
         type: String,

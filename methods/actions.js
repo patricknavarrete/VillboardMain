@@ -206,7 +206,7 @@ var functions = {
                 cPhoneNumber : req.body.cPhoneNumber,
                 vehicleModel: req.body.vehicleModel,
                 plateNumber: req.body.plateNumber,
-                // cqrUrl: req.file.location,
+                // photoUrlCar: req.file.location,
                 // carQRpicture: req.body.carQRpicture,
                 email: req.body.email
             });
@@ -230,7 +230,7 @@ var functions = {
                 cPhoneNumber : req.body.cPhoneNumber,
                 vehicleModel: req.body.vehicleModel,
                 plateNumber: req.body.plateNumber,
-                // cqrUrl: req.file.location,
+                // photoUrlCar: req.file.location,
                 email: req.body.email,
                 },
                 },
@@ -344,6 +344,14 @@ var functions = {
             const imageCollection = req.app.locals.imageCollection
             const uploaded = req.file.location
             console.log(req.file)
+
+               // sortPost: function(req,res){
+            //     Post.find().sort({timestamps: -1})
+            // },
+
+            // postSort();
+
+            
     
 
             newPost.save(function (err, newPost) {
@@ -354,8 +362,13 @@ var functions = {
                     res.json({success: true, msg: 'Successfully saved'})
                 }
             })
+       
+
         }
     },
+
+
+
 
     
     addNewSuggestion: function (req,res){
@@ -510,8 +523,23 @@ var functions = {
         }
     },
 
+
+
+
+
     postUserinfo: function(req,res){
         User.find({}, function(err,documents){
+            if(err){
+                res.send('Something went wrong');
+            }
+            else{
+                res.send(documents);
+            }
+        })
+    },
+
+    postReservation: function(req,res){
+        Reservation.find({}, function(err,documents){
             if(err){
                 res.send('Something went wrong');
             }
