@@ -538,16 +538,16 @@ var functions = {
         })
     },
 
-    postReservation: function(req,res){
-        Reservation.find({}, function(err,documents){
-            if(err){
-                res.send('Something went wrong');
-            }
-            else{
-                res.send(documents);
-            }
-        })
-    },
+    // postReservation: function(req,res){
+    //     Reservation.find({}, function(err,documents){
+    //         if(err){
+    //             res.send('Something went wrong');
+    //         }
+    //         else{
+    //             res.send(documents);
+    //         }
+    //     })
+    // },
 
     postFamily: function(req,res){
         AddFamily.find({}, function(err,documents){
