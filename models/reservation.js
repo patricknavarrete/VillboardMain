@@ -1,9 +1,9 @@
 var mongoose = require('mongoose')
 var Schema = mongoose.Schema;
-var User = require ('../models/user')
+var User = require('../models/user')
 
 
-var reservationSchema = new Schema ({
+var reservationSchema = new Schema({
     rFirstName: {
         type: String,
         require: true,
@@ -12,22 +12,26 @@ var reservationSchema = new Schema ({
         type: String,
         require: true,
     },
-    rAddress:{
+    rAddress: {
         type: String,
         require: true,
     },
-    rPhoneNumber:{
+    userId: {
+        type: mongoose.Schema.Types.ObjectId,
+        required: true
+    },
+    rPhoneNumber: {
         type: String,
         require: true,
     },
     venue: {
         type: String,
     },
-    reservationTime:{
+    reservationTime: {
         type: String,
-        require:true,
+        require: true,
     },
-    reservationDate:{
+    reservationDate: {
         type: Date,
         require: true,
     },
@@ -37,11 +41,12 @@ var reservationSchema = new Schema ({
         default: 'PENDING'
     },
 
-}, 
+},
 
-{timestamps:true
-    
-})
+    {
+        timestamps: true
+
+    })
 
 
 module.exports = mongoose.model('Reservation', reservationSchema)

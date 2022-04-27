@@ -63,7 +63,12 @@ var userSchema = new Schema({
     reservationField:{
         type: Array,
         default:[]
+    }, 
+    status : {
+        type: String,
+        default: null
     }
+    
 
 },
 {timestamps:true

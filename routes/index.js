@@ -91,8 +91,12 @@ router.post('/changeAddress', actions.changeAddress)
 
 router.post('/changePhonenumber', actions.changePhonenumber)
 
+router.post('/approveDeclineAccount', actions.approveDeclineAccount)
 
+router.get('/getPendingAccounts', actions.getPendingAccounts)
 
+router.get('/getPendingReservations', actions.getPendingReservations)
 
+router.post('/approveDeclineReservation', actions.approveDeclineReservation)
 
 module.exports = router
