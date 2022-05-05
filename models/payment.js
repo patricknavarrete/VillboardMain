@@ -24,6 +24,10 @@ var paymentSchema = new Schema ({
         require: true,
         unique: true,
     },
+    userId: {
+        type: mongoose.Schema.Types.ObjectId,
+        required: true
+    },
     typeTransaction: {
         type: String,
         require: true,
@@ -39,6 +43,10 @@ var paymentSchema = new Schema ({
         type: String,
         require: true,
         default: 'PENDING'
+    },
+    reasonNote: {
+        type: String,
+        default: ""
     },
 }, 
 

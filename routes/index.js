@@ -99,4 +99,8 @@ router.get('/getPendingReservations', actions.getPendingReservations)
 
 router.post('/approveDeclineReservation', actions.approveDeclineReservation)
 
+router.post('/approveDeclineTransaction', actions.approveDeclineTransaction)
+
+router.get('/getPendingTransactions', actions.getPendingTransactions)
+
 module.exports = router

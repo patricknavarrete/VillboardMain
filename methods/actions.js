@@ -258,7 +258,7 @@ var functions = {
             (!req.body.uLastName) ||
             (!req.body.uAddress) ||
             (!req.body.uPhoneNumber) ||
-            (!req.body.refNumber) ||
+            // (!req.body.refNumber) ||
             (!req.body.typeTransaction)
 
         ) {
@@ -274,38 +274,15 @@ var functions = {
                 typeTransaction: req.body.typeTransaction,
                 photoUrl: req.file.location,
                 proofPayment: req.body.proofPayment,
-                pPending: req.body.pPending
+                userId: mongoose.Types.ObjectId(req.body.userId)
+                // pPending: req.body.pPending
             });
 
-            const imageCollection = req.app.locals.imageCollection
-            const uploaded = req.file.location
+            // const imageCollection = req.app.locals.imageCollection
+            // const uploaded = req.file.location
             console.log(req.file)
 
-            newPayment.save()
-
-            const userPayment = await User.findOneAndUpdate(
-
-                { email: req.body.email },
-
-                {
-                    $push: {
-                        paymentField: {
-                            uFirstName: req.body.uFirstName,
-                            uLastName: req.body.uLastName,
-                            uAddress: req.body.uAddress,
-                            uPhoneNumber: req.body.uPhoneNumber,
-                            refNumber: req.body.refNumber,
-                            typeTransaction: req.body.typeTransaction,
-                            photoUrl: req.file.location,
-                            pPending: req.body.pPending,
-                            email: req.body.email
-                        },
-                    },
-                },
-
-            )
-
-            userPayment.save(function (err, userPayment) {
+            newPayment.save(function (err, userPayment) {
                 if (err) {
                     res.json({ success: false, msg: 'Failed to save' })
                 }
@@ -313,6 +290,37 @@ var functions = {
                     res.json({ success: true, msg: 'Successfully saved' })
                 }
             })
+
+            // const userPayment = await User.findOneAndUpdate(
+
+            //     { email: req.body.email },
+
+            //     {
+            //         $push: {
+            //             paymentField: {
+            //                 uFirstName: req.body.uFirstName,
+            //                 uLastName: req.body.uLastName,
+            //                 uAddress: req.body.uAddress,
+            //                 uPhoneNumber: req.body.uPhoneNumber,
+            //                 refNumber: req.body.refNumber,
+            //                 typeTransaction: req.body.typeTransaction,
+            //                 photoUrl: req.file.location,
+            //                 pPending: req.body.pPending,
+            //                 // email: req.body.email
+            //             },
+            //         },
+            //     },
+
+            // )
+
+            // userPayment.save(function (err, userPayment) {
+            //     if (err) {
+            //         res.json({ success: false, msg: 'Failed to save' })
+            //     }
+            //     else {
+            //         res.json({ success: true, msg: 'Successfully saved' })
+            //     }
+            // })
         }
     },
 
@@ -424,6 +432,7 @@ var functions = {
     },
 
     addReservation: function (req, res) {
+        console.log(req.body)
         if ((!req.body.rFirstName) ||
             (!req.body.rLastName) ||
             (!req.body.rAddress) ||
@@ -439,6 +448,7 @@ var functions = {
                 rFirstName: req.body.rFirstName,
                 rLastName: req.body.rLastName,
                 rAddress: req.body.rAddress,
+                userId: mongoose.Types.ObjectId(req.body.userId),
                 rPhoneNumber: req.body.rPhoneNumber,
                 venue: req.body.venue,
                 reservationTime: req.body.reservationTime,
@@ -447,9 +457,9 @@ var functions = {
             });
 
 
-            const rDate = req.body.reservationDate
+            // const rDate = req.body.reservationDate
 
-            const rTime = req.body.reservationTime
+            // const rTime = req.body.reservationTime
 
 
             //  Reservation.findOne({reservationDate:req.body.reservationDate}, (err,result) => {
@@ -552,23 +562,23 @@ var functions = {
 
         Reservation.aggregate([
             {
-              '$lookup': {
-                'from': 'users', 
-                'localField': 'userId', 
-                'foreignField': '_id', 
-                'as': 'user_reservation'
-              }
+                '$lookup': {
+                    'from': 'users',
+                    'localField': 'userId',
+                    'foreignField': '_id',
+                    'as': 'user_reservation'
+                }
             }, {
-              '$unwind': {
-                'path': '$user_reservation', 
-                'preserveNullAndEmptyArrays': true
-              }
+                '$unwind': {
+                    'path': '$user_reservation',
+                    'preserveNullAndEmptyArrays': true
+                }
             }
-          ]).then((resp) => {
+        ]).then((resp) => {
             res.send(resp);
-          }).catch((err) => {
+        }).catch((err) => {
             res.status(500).json({ msg: "Reservation not found", err: err });
-          })
+        })
     },
 
     postFamily: function (req, res) {
@@ -639,18 +649,26 @@ var functions = {
     },
 
     postPayment: function (req, res) {
-        Payment.find({}, function (err, documents) {
-            if (err) {
-                res.send('Something went wrong');
+        Payment.aggregate([
+            {
+                '$lookup': {
+                    'from': 'users',
+                    'localField': 'userId',
+                    'foreignField': '_id',
+                    'as': 'user_payment'
+                }
+            }, {
+                '$unwind': {
+                    'path': '$user_payment',
+                    'preserveNullAndEmptyArrays': true
+                }
             }
-            else {
-                res.send(documents);
-
-            }
+        ]).then((resp) => {
+            res.send(resp);
+        }).catch((err) => {
+            res.status(500).json({ msg: "Transaction not found", err: err });
         })
     },
-
-
 
     deleteDataUser: function (req, res) {
         User.findOneAndDelete({
@@ -846,29 +864,27 @@ var functions = {
     },
 
     approveDeclineAccount: async function (req, res) {
-        let { accountId, verdict, email } = req.body;
+        let { account, verdict } = req.body;
 
         if (verdict !== 'approved') {
-            await User.findByIdAndRemove(accountId, { useFindAndModify: false }, async function (err, result) {
+            await User.findByIdAndRemove(account._id, { useFindAndModify: false }, async function (err, result) {
                 if (err) {
                     return res.status(500).json({ msg: "User not found" });
                 }
 
                 await sendEmail({
-                    to: email,
+                    to: account.email,
                     subject: "Account Registration Declined",
-                    text: sendMessage(`We do apologize your registration has been declined, our administrator was unable to validate the document that has been uploaded to our system to continue with your registration just upload the correct document in the application or our website(LINK).
+                    text: sendMessage(`Hi ${account.firstName},`, `We do apologize your registration has been declined, our administrator was unable to validate the document that has been uploaded to our system to continue with your registration just upload the correct document in the application or our website <br>(LINK).
 
                     This are the documents that can be uploaded to the system.
-                    *Home Owners membership certificate (Picture)
-                    *Land Title (Picture)
+                    *Home Owners membership certificate <br>(Picture)
+                    *Land Title <br>(Picture)<br>
                     
+                    Got questions? You can also reply to this email<br>
+                    Visit our Terms and Conditions. <br>(LINK) <br><br>
                     
-                    Got questions?
-                    You can also reply to this email
-                    Visit our Terms and Conditions.(LINK)
-                    
-                    Download Villboard Here:(LINK)`),
+                    Download Villboard Here:<br>(LINK)`),
                     image: [image]
                 });
                 // console.log(image)
@@ -881,18 +897,17 @@ var functions = {
                 return res.json({ msg: 'Account declined successfully' });
             });
         } else {
-            await User.findByIdAndUpdate(accountId, { status: verdict }, { new: true, useFindAndModify: false }, async function (err, result) {
+            await User.findByIdAndUpdate(account._id, { status: verdict }, { new: true, useFindAndModify: false }, async function (err, result) {
                 if (err) {
                     return res.status(500).json({ msg: "User not found" });
                 }
 
                 await sendEmail({
-                    to: email,
+                    to: account.email,
                     subject: "Account Registration Approved",
-                    text: sendMessage(`Your registration has been approved by the ADMIN of Villa Caceres you may now start to enjoy our Mobile Application for Villboard.  <br><br>
-                    Got questions? <br>
-                    You can also reply to this email <br>
-                    Visit our Terms and Conditions.(LINK) <br><br>
+                    text: sendMessage(`Hi ${result.firstName},`, `Your registration has been approved by the ADMIN of Villa Caceres you may now start to enjoy our Mobile Application for Villboard.  <br><br>
+                    Got questions? You can also reply to this email <br>
+                    Visit our Terms and Conditions.<br>(LINK) <br><br>
                     
                     Download Villboard Here:(LINK)`),
                     image: [image]
@@ -924,8 +939,18 @@ var functions = {
         });
     },
 
+    getPendingTransactions: async function (req, res) {
+        Payment.find({ pPending: 'pending' || 'PENDING' }, function (err, result) {
+            if (err) {
+                return res.status(500).json({ msg: "Something went wrong" });
+            }
+            return res.json(result);
+
+        });
+    },
+
     approveDeclineReservation: async function (req, res) {
-        let { reserveItem, verdict } = req.body;
+        let { reserveItem, verdict, reason } = req.body;
 
         // if (verdict !== 'approved') {
         //     await User.findByIdAndRemove(reserveId, { useFindAndModify: false }, function (err, result) {
@@ -935,32 +960,70 @@ var functions = {
         //         return res.json({ msg: 'Account declined successfully' });
         //     });
         // } else {
-        await Reservation.findByIdAndUpdate(reserveItem._id, { rPending: verdict }, { new: true, useFindAndModify: false }, async function (err, result) {
+        await Reservation.findByIdAndUpdate(reserveItem._id, { rPending: verdict, reason }, { new: true, useFindAndModify: false }, async function (err, result) {
             if (err) {
                 return res.status(500).json({ msg: "Reservation not found" });
             }
 
+            var reasonText = reason === "" ? "" : ' Due to following reason ' + reason;
             if (verdict === 'approved') {
                 await sendEmail({
                     to: reserveItem.user_reservation.email,
                     subject: "Reservation Approved",
-                    text: sendMessage(`Hi ${reserveItem.rFirstName} <br><br>
-
-                    Congratulations! Your reservation has been approved by the ADMIN of Villa Caceres. For the reservation of ${reserveItem.venue} with the time of ${moment(reserveItem.reservationDate).format('ll')} thank you for reservation. <br>Got questions? You can also reply to this email Visit our Terms and Conditions. <br>(LINK) 
-                    <br><br>Download Villboard Here:(LINK)
+                    text: sendMessage(`Hi ${reserveItem.rFirstName},`, `Congratulations! Your reservation has been approved by the ADMIN of Villa Caceres. For the reservation of ${reserveItem.venue} with the time of ${moment(reserveItem.reservationDate).format('ll')} thank you for reservation. <br>Got questions? You can also reply to this email.<br>Visit our Terms and Conditions. <br>(LINK) 
+                    <br><br>Download Villboard Here:<br>(LINK)
                     `),
                     image: [image]
                 });
             } else {
                 await sendEmail({
-                    to: email,
+                    to: reserveItem.user_reservation.email,
                     subject: "Reservation Declined",
-                    text: sendMessage(`Your registration has been approved by the ADMIN of Villa Caceres you may now start to enjoy our Mobile Application for Villboard.  <br><br>
-                    Got questions? <br>
-                    You can also reply to this email <br>
-                    Visit our Terms and Conditions.(LINK) <br><br>
-                    
-                    Download Villboard Here:(LINK)`),
+                    text: sendMessage(`Hi ${reserveItem.rFirstName},`, `Sorry! Your reservation has been disapproved by the ADMIN of Villa Caceres. For the reservation of ${reserveItem.venue} with the time of ${moment(reserveItem.reservationDate).format('ll')}.${reasonText} <br>Got questions? You can also reply to this email.<br>Visit our Terms and Conditions. <br>(LINK) 
+                    <br><br>Download Villboard Here:<br>(LINK)
+                    `),
+                    image: [image]
+                });
+            }
+            return res.json(result);
+
+        });
+
+    },
+
+    approveDeclineTransaction: async function (req, res) {
+        let { transItem, verdict, reason } = req.body;
+
+        // if (verdict !== 'approved') {
+        //     await User.findByIdAndRemove(reserveId, { useFindAndModify: false }, function (err, result) {
+        //         if (err) {
+        //             return res.status(500).json({ msg: "User not found" });
+        //         }
+        //         return res.json({ msg: 'Account declined successfully' });
+        //     });
+        // } else {
+        await Payment.findByIdAndUpdate(transItem._id, { pPending: verdict, reasonNote: reason }, { new: true, useFindAndModify: false }, async function (err, result) {
+            if (err) {
+                return res.status(500).json({ msg: "Reservation not found" });
+            }
+
+            var reasonText = reason === "" ? "" : ' Due to following reason ' + reason;
+            if (verdict === 'approved') {
+                await sendEmail({
+                    to: transItem.user_payment.email,
+                    subject: "Payment Approved",
+                    text: sendMessage(`Hi ${transItem.uFirstName},`, `Congratulations! Your payment receipt has been confirmed by the ADMIN of Villa Caceres. <br><br>Got questions? You can also reply to this email.<br>Visit our Terms and Conditions. <br>(LINK) 
+                    <br><br>Download Villboard Here:<br>(LINK)
+                    `),
+                    image: [image]
+                });
+            } else {
+                await sendEmail({
+                    to: transItem.user_payment.email,
+                    subject: "Payment Declined",
+                    text: sendMessage(`Hi ${transItem.uFirstName},`, `Sorry! Your payment receipt has been declined by the ADMIN of Villa Caceres.${reasonText} <br><br>Got questions? You can also reply to this email.<br>Visit our Terms and Conditions. <br>(LINK) 
+                    <br><br>Download Villboard Here:<br>(LINK)
+                    `),
                     image: [image]
                 });
             }
@@ -977,7 +1040,7 @@ image.filename = 'villboard.png';
 image.path = './methods/villboard.png';
 image.cid = 'bannerimage12345';
 
-const sendMessage = (text) => {
+const sendMessage = (header, text) => {
     return `
     <!DOCTYPE html>
     <html>
@@ -1023,10 +1086,12 @@ const sendMessage = (text) => {
     </style>
     </head>
     <body>
-        <div class="main-container" >   
-            <h1>You are halfway there!</h1> <br><br>
+        <div class="main-container">   
+            <center>
+                <img src="cid:bannerimage12345" height="150" width="150" alt="Logo"/> 
+            </center>
+            <h1>${header}</h1> <br><br>
             <p style="font-size:120%;"> ${text} </p><br>
-            <img src="cid:bannerimage12345" heigh="150" width="150" alt="Logo"/>
         </div>
     </body>
     </html>

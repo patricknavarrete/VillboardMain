@@ -40,6 +40,10 @@ var reservationSchema = new Schema({
         require: true,
         default: 'PENDING'
     },
+    reason: {
+        type: String,
+        default: ""
+    },
 
 },
 
