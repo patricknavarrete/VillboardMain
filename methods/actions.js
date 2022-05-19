@@ -524,10 +524,10 @@ var functions = {
         }
         )
     },
-    getinfo: function (req, res) {
+    getinfo: async function (req, res) {
         if (req.headers.authorization && req.headers.authorization.split(' ')[0] === 'Bearer') {
             var token = req.headers.authorization.split(' ')[1]
-            var decodedtoken = jwt.decode(token, config.secret)
+            var decodedtoken = await jwt.decode(token, config.secret)
             return res.json({ success: true, decodedtoken })
         }
         else {

@@ -66,7 +66,7 @@ var userSchema = new Schema({
     }, 
     status : {
         type: String,
-        default: null
+        default: "Pending"
     }
     
 
