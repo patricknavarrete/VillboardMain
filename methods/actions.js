@@ -262,8 +262,8 @@ var functions = {
             (!req.body.uAddress) ||
             (!req.body.uPhoneNumber) ||
             // (!req.body.refNumber) ||
-            (!req.body.typeTransaction) || 
-            (!req.body.paymentDate)
+            (!req.body.typeTransaction)  
+            // (!req.body.paymentDate)
 
         ) {
             res.json({ success: false, msg: 'Enter all fields' })
@@ -278,7 +278,7 @@ var functions = {
                 typeTransaction: req.body.typeTransaction,
                 photoUrl: req.file.location,
                 proofPayment: req.body.proofPayment,
-                paymentDate:  paymentDate,
+                // paymentDate:  paymentDate,
                 userId: mongoose.Types.ObjectId(req.body.userId)
                
                 // pPending: req.body.pPending

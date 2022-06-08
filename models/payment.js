@@ -39,10 +39,10 @@ var paymentSchema = new Schema ({
         data: Buffer,
         contentType: String,
     },
-    paymentDate: {
-        type: Date,
-        require: true,
-    },
+    // paymentDate: {
+    //     type: Date,
+    //     require: true,
+    // },
     pPending: {
         type: String,
         require: true,
