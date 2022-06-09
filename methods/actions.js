@@ -235,6 +235,7 @@ var functions = {
                             plateNumber: req.body.plateNumber,
                             // photoUrlCar: req.file.location,
                             email: req.body.email,
+                            userId: mongoose.Types.ObjectId(req.body.userId)
                         },
                     },
                 }
