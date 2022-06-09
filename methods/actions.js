@@ -1074,6 +1074,7 @@ const sendMessage = (header, text) => {
             .main-container{
                 background: white; 
                 padding: 20px 60px 20px 60px;
+                margin:0;
             }
         }
 
@@ -1081,6 +1082,7 @@ const sendMessage = (header, text) => {
             .main-container{
                 background: white; 
                 padding: 20px;
+                margin: 0;
             }
         }
     </style>
