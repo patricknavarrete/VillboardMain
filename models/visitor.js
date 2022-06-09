@@ -18,6 +18,14 @@ var visitorSchema = new Schema ({
         type: String,
         require: true,
     },
+    contactHomeOwner: {
+        type: String,
+        require: true,
+    },
+    emailHomeOwner: {
+        type: String,
+        require: true,
+    },
     homeOwnerAddress: {
         type: String,
         require: true,
@@ -25,6 +33,10 @@ var visitorSchema = new Schema ({
     purpose: {
         type: String,
         require: true,
+    },
+    referenceNumber:{
+        type: String,
+        require: false,
     }
 
     

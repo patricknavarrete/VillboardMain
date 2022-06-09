@@ -28,6 +28,9 @@ const sendEmail = require('../middleware/nodemailer');
 // })
 // app.use(cors());
 
+var emailHomeOwner = "";
+var fullName = "";
+
 
 var functions = {
     addNew: function (req, res) {
@@ -259,7 +262,8 @@ var functions = {
             (!req.body.uAddress) ||
             (!req.body.uPhoneNumber) ||
             // (!req.body.refNumber) ||
-            (!req.body.typeTransaction)
+            (!req.body.typeTransaction)  
+            // (!req.body.paymentDate)
 
         ) {
             res.json({ success: false, msg: 'Enter all fields' })
@@ -274,7 +278,9 @@ var functions = {
                 typeTransaction: req.body.typeTransaction,
                 photoUrl: req.file.location,
                 proofPayment: req.body.proofPayment,
+                // paymentDate:  paymentDate,
                 userId: mongoose.Types.ObjectId(req.body.userId)
+               
                 // pPending: req.body.pPending
             });
 
@@ -405,6 +411,8 @@ var functions = {
             (!req.body.emailV) ||
             (!req.body.address) ||
             (!req.body.personVisit) ||
+            (!req.body.contactHomeOwner) ||
+            (!req.body.emailHomeOwner) ||
             (!req.body.homeOwnerAddress) ||
             (!req.body.purpose)
 
@@ -417,14 +425,24 @@ var functions = {
                 emailV: req.body.emailV,
                 address: req.body.address,
                 personVisit: req.body.personVisit,
+                contactHomeOwner: req.body.contactHomeOwner,
+                emailHomeOwner: req.body.emailHomeOwner,
                 homeOwnerAddress: req.body.homeOwnerAddress,
-                purpose: req.body.purpose
+                purpose: req.body.purpose,
+                referenceNumber: req.body.referenceNumber
             });
             newVisitor.save(function (err, newVisitor) {
                 if (err) {
                     res.json({ success: false, msg: 'Failed to save' })
                 }
                 else {
+                    //Send an email upon successful save
+                    sendEmail({
+                        to: [req.body.emailHomeOwner,req.body.emailV], // array of email
+                        subject: "Test Email", //subject of the email
+                        text: sendMessage(`Hi ${req.body.fullName}`,`What the fuck!`), //1: for header, 2:body content
+                        image: [image] //array of image
+                    });
                     res.json({ success: true, msg: 'Successfully saved' })
                 }
             })
@@ -886,6 +904,8 @@ var functions = {
                     
                     Download Villboard Here:<br>(LINK)`),
                     image: [image]
+                    //link
+                    //villacasereser.com/emailacknowledge.php/post?id="1234",acknowledge="confirmed"
                 });
                 // console.log(image)
 
@@ -993,7 +1013,7 @@ var functions = {
 
     approveDeclineTransaction: async function (req, res) {
         let { transItem, verdict, reason } = req.body;
-
+        
         // if (verdict !== 'approved') {
         //     await User.findByIdAndRemove(reserveId, { useFindAndModify: false }, function (err, result) {
         //         if (err) {
@@ -1032,6 +1052,16 @@ var functions = {
         });
 
     },
+    //  notifyHomeOwner : function (fullname, email) {
+        
+    //     sendEmail({
+    //         to: email,
+    //         subject: "Payment Declined",
+    //         text: sendMessage(`Hi ${fullname},`, `Sorry! Your payment receipt has been declined by the ADMIN of Villa Caceres.${reasonText} <br><br>Got questions? You can also reply to this email.<br>Visit our Terms and Conditions. <br>(LINK) 
+    //         <br><br>Download Villboard Here:<br>(LINK)
+    //         `)
+    //     });
+    //  }
 
 }
 
