@@ -32,6 +32,10 @@ var carSchema = new Schema ({
         type: String,
         require:true,
     },
+    userId: {
+        type: mongoose.Schema.Types.ObjectId,
+        required: true
+    },
     // photoUrlCar:{
     //     type: String,
     // },

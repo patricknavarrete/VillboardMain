@@ -144,6 +144,7 @@ var functions = {
                 // photoUrlPet: req.file.location,
                 // petQRpicture: req.body.petQRpicture,
                 email: req.body.email,
+                userId: mongoose.Types.ObjectId(req.body.userId)
             });
 
             // const imageCollection = req.app.locals.imageCollection
@@ -167,6 +168,7 @@ var functions = {
                             petBreed: req.body.petBreed,
                             // photoUrlPet: req.file.location,
                             email: req.body.email,
+                            userId: mongoose.Types.ObjectId(req.body.userId)
                         },
                     },
                 }
@@ -208,7 +210,8 @@ var functions = {
                 plateNumber: req.body.plateNumber,
                 // photoUrlCar: req.file.location,
                 // carQRpicture: req.body.carQRpicture,
-                email: req.body.email
+                email: req.body.email,
+                userId: mongoose.Types.ObjectId(req.body.userId)
             });
 
             // const imageCollection = req.app.locals.imageCollection
@@ -529,6 +532,7 @@ var functions = {
                 return res.status(403).send({ success: false, msg: 'Authentication Failed, Account not approved yet' })
 
             }
+            
 
             user.comparePassword(req.body.password, function (err, isMatch) {
                 if (isMatch && !err) {
@@ -542,6 +546,7 @@ var functions = {
         }
         )
     },
+
     getinfo: async function (req, res) {
         if (req.headers.authorization && req.headers.authorization.split(' ')[0] === 'Bearer') {
             var token = req.headers.authorization.split(' ')[1]

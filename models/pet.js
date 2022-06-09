@@ -32,6 +32,10 @@ var petSchema = new Schema ({
         type: String,
         require:true,
     },
+    userId: {
+        type: mongoose.Schema.Types.ObjectId,
+        required: true
+    }
     // photoUrlPet:{
     //     type: String,
     // },
