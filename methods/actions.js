@@ -887,6 +887,27 @@ var functions = {
 
     },
 
+    changeRole: function (req, res) {
+        let { newrole } = req.body;
+        newrole = newrole.trim();
+
+        User.findOne({
+            email: req.body.email
+        },
+            function (err, user) {
+
+                User.findOneAndUpdate(
+                    { email: req.body.email },
+                    { $set: { role: newrole } },
+                    (err, result) => {
+                        if (err) return res.status(500).json({ msg: "Error updating Role" });
+
+                        return res.json({ msg: newrole });
+                    })
+            })
+
+    },
+
     approveDeclineAccount: async function (req, res) {
         let { account, verdict } = req.body;
 

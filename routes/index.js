@@ -91,6 +91,8 @@ router.post('/changeAddress', actions.changeAddress)
 
 router.post('/changePhonenumber', actions.changePhonenumber)
 
+router.post('/changeRole',actions.changeRole)
+
 router.post('/approveDeclineAccount', actions.approveDeclineAccount)
 
 router.get('/getPendingAccounts', actions.getPendingAccounts)
