@@ -137,14 +137,15 @@ var functions = {
             var newPet = Pet({
                 pFirstName: req.body.pFirstName,
                 pLastName: req.body.pLastName,
+                pEmail: req.body.pEmail,
                 pAddress: req.body.pAddress,
                 pPhoneNumber: req.body.pPhoneNumber,
                 petName: req.body.petName,
                 petBreed: req.body.petBreed,
                 // photoUrlPet: req.file.location,
                 // petQRpicture: req.body.petQRpicture,
-                email: req.body.email,
-                userId: mongoose.Types.ObjectId(req.body.userId)
+                userId: mongoose.Types.ObjectId(req.body.userId),
+                pQR: req.body.pQR
             });
 
             // const imageCollection = req.app.locals.imageCollection
@@ -163,12 +164,13 @@ var functions = {
                             pFirstName: req.body.pFirstName,
                             pLastName: req.body.pLastName,
                             pAddress: req.body.pAddress,
+                            pEmail: req.body.pEmail,
                             pPhoneNumber: req.body.pPhoneNumber,
                             petName: req.body.petName,
                             petBreed: req.body.petBreed,
                             // photoUrlPet: req.file.location,
-                            email: req.body.email,
-                            userId: mongoose.Types.ObjectId(req.body.userId)
+                            userId: mongoose.Types.ObjectId(req.body.userId),
+                            pQR: req.body.pQR
                         },
                     },
                 }
@@ -204,14 +206,15 @@ var functions = {
             var newCar = Car({
                 cFirstName: req.body.cFirstName,
                 cLastName: req.body.cLastName,
+                cEmail: req.body.cEmail,
                 cAddress: req.body.cAddress,
                 cPhoneNumber: req.body.cPhoneNumber,
                 vehicleModel: req.body.vehicleModel,
                 plateNumber: req.body.plateNumber,
                 // photoUrlCar: req.file.location,
                 // carQRpicture: req.body.carQRpicture,
-                email: req.body.email,
-                userId: mongoose.Types.ObjectId(req.body.userId)
+                userId: mongoose.Types.ObjectId(req.body.userId),
+                cQR: req.body.cQR
             });
 
             // const imageCollection = req.app.locals.imageCollection
@@ -230,12 +233,13 @@ var functions = {
                             cFirstName: req.body.cFirstName,
                             cLastName: req.body.cLastName,
                             cAddress: req.body.cAddress,
+                            cEmail: req.body.cEmail,
                             cPhoneNumber: req.body.cPhoneNumber,
                             vehicleModel: req.body.vehicleModel,
                             plateNumber: req.body.plateNumber,
                             // photoUrlCar: req.file.location,
-                            email: req.body.email,
-                            userId: mongoose.Types.ObjectId(req.body.userId)
+                            userId: mongoose.Types.ObjectId(req.body.userId),
+                            cQR: req.body.cQR
                         },
                     },
                 }

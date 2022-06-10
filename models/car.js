@@ -36,6 +36,10 @@ var carSchema = new Schema ({
         type: mongoose.Schema.Types.ObjectId,
         required: true
     },
+    cQR:{
+        type: String,
+        require: true,
+    },
     // photoUrlCar:{
     //     type: String,
     // },
