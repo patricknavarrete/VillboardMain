@@ -154,43 +154,49 @@ var functions = {
 
 
 
-            newPet.save()
+            newPet.save(function (err, newPet) {
+                        if (err) {
+                            res.json({ success: false, msg: 'Failed to save Pet' })
+                        }
+                        else {
+                            res.json({ success: true, msg: 'Successfully AddedPet' })
+                        }
+                    })
 
-            const userPet = await User.findOneAndUpdate(
-                { email: req.body.email },
-                {
-                    $push: {
-                        petField: {
-                            pFirstName: req.body.pFirstName,
-                            pLastName: req.body.pLastName,
-                            pAddress: req.body.pAddress,
-                            pEmail: req.body.pEmail,
-                            pPhoneNumber: req.body.pPhoneNumber,
-                            petName: req.body.petName,
-                            petBreed: req.body.petBreed,
-                            // photoUrlPet: req.file.location,
-                            userId: mongoose.Types.ObjectId(req.body.userId),
-                            pQR: req.body.pQR
-                        },
-                    },
                 }
-            );
 
-            console.log(userPet),
+            },
 
-                userPet.save(function (err, userPet) {
-                    if (err) {
-                        res.json({ success: false, msg: 'Failed to save Pet' })
-                    }
-                    else {
-                        res.json({ success: true, msg: 'Successfully AddedPet' })
-                    }
-                })
+            // const userPet = await User.findOneAndUpdate(
+            //     { email: req.body.email },
+            //     {
+            //         $push: {
+            //             petField: {
+            //                 pFirstName: req.body.pFirstName,
+            //                 pLastName: req.body.pLastName,
+            //                 pAddress: req.body.pAddress,
+            //                 pEmail: req.body.pEmail,
+            //                 pPhoneNumber: req.body.pPhoneNumber,
+            //                 petName: req.body.petName,
+            //                 petBreed: req.body.petBreed,
+            //                 // photoUrlPet: req.file.location,
+            //                 userId: mongoose.Types.ObjectId(req.body.userId),
+            //                 pQR: req.body.pQR
+            //             },
+            //         },
+            //     }
+            // );
 
-        }
+            // console.log(userPet),
 
-    },
-
+            //     userPet.save(function (err, userPet) {
+            //         if (err) {
+            //             res.json({ success: false, msg: 'Failed to save Pet' })
+            //         }
+            //         else {
+            //             res.json({ success: true, msg: 'Successfully AddedPet' })
+            //         }
+            //     })
 
     addCar: async function async(req, res) {
         if ((!req.body.cFirstName) ||
@@ -211,6 +217,7 @@ var functions = {
                 cPhoneNumber: req.body.cPhoneNumber,
                 vehicleModel: req.body.vehicleModel,
                 plateNumber: req.body.plateNumber,
+                // email: req.body.email,
                 // photoUrlCar: req.file.location,
                 // carQRpicture: req.body.carQRpicture,
                 userId: mongoose.Types.ObjectId(req.body.userId),
@@ -221,43 +228,53 @@ var functions = {
             // const uploaded = req.file.location
             // console.log(req.file)
 
-            newCar.save()
+            newCar.save(function (err, newCar) {
+                            if (err) {
+                                res.json({ success: false, msg: 'Failed to save Car' })
+                            }
+                            else {
+                                res.json({ success: true, msg: 'Successfully AddedCar' })
+                            }
+                        })
+            
+           }
+        },
 
-            const userCar = await User.findOneAndUpdate(
+    //         const userCar = await User.findOneAndUpdate(
 
-                { email: req.body.email },
+    //             { cEmail: req.body.cEmail },
 
-                {
-                    $push: {
-                        carField: {
-                            cFirstName: req.body.cFirstName,
-                            cLastName: req.body.cLastName,
-                            cAddress: req.body.cAddress,
-                            cEmail: req.body.cEmail,
-                            cPhoneNumber: req.body.cPhoneNumber,
-                            vehicleModel: req.body.vehicleModel,
-                            plateNumber: req.body.plateNumber,
-                            // photoUrlCar: req.file.location,
-                            userId: mongoose.Types.ObjectId(req.body.userId),
-                            cQR: req.body.cQR
-                        },
-                    },
-                }
-            )
+    //             {
+    //                 $push: {
+    //                     carField: {
+    //                         cFirstName: req.body.cFirstName,
+    //                         cLastName: req.body.cLastName,
+    //                         cAddress: req.body.cAddress,
+    //                         cEmail: req.body.cEmail,
+    //                         cPhoneNumber: req.body.cPhoneNumber,
+    //                         vehicleModel: req.body.vehicleModel,
+    //                         plateNumber: req.body.plateNumber,
+    //                         // photoUrlCar: req.file.location,
+    //                         userId: mongoose.Types.ObjectId(req.body.userId),
+    //                         cQR: req.body.cQR
+    //                     },
+    //                 },
+    //             }
+    //         )
 
-            userCar.save(function (err, userCar) {
-                if (err) {
-                    res.json({ success: false, msg: 'Failed to save Car' })
-                }
-                else {
-                    res.json({ success: true, msg: 'Successfully AddedCar' })
-                }
-            })
+    //         userCar.save(function (err, userCar) {
+    //             if (err) {
+    //                 res.json({ success: false, msg: 'Failed to save Car' })
+    //             }
+    //             else {
+    //                 res.json({ success: true, msg: 'Successfully AddedCar' })
+    //             }
+    //         })
 
-        }
+    //     }
 
 
-    },
+    // },
 
 
 

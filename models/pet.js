@@ -13,8 +13,8 @@ var petSchema = new Schema ({
         require: true,
     },
     pEmail:{
-        type: mongoose.Schema.Types.ObjectId,
-        ref:'User'
+        type: String,
+        require: true,
     },
     pAddress:{
         type: String,
