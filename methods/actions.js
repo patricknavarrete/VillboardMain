@@ -376,7 +376,7 @@ var functions = {
                         photoUrlProfile: userInform.photoUrlProfile,
                         email: userInform.email,
                         firstName: userInform.firstName,
-                        photoUrlProfile: req.file.location
+                        // photoUrlProfile: req.file.location
                     },
                 });
 
