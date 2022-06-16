@@ -86,6 +86,7 @@ var functions = {
                 aAddress: req.body.aAddress,
                 aPhoneNumber: req.body.aPhoneNumber,
                 Member: req.body.Member,
+                userId: mongoose.Types.ObjectId(req.body.userId)
             });
 
             newFamily.save()
