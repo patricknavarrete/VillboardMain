@@ -86,31 +86,10 @@ var functions = {
                 aAddress: req.body.aAddress,
                 aPhoneNumber: req.body.aPhoneNumber,
                 Member: req.body.Member,
-                userId: mongoose.Types.ObjectId(req.body.userId)
+                userId: req.body.userId
             });
 
-            newFamily.save()
-
-            const userFamily = await User.findOneAndUpdate(
-
-                { email: req.body.email },
-                {
-                    $push: {
-                        familyField: {
-                            aFirstName: req.body.pFirstName,
-                            aLastName: req.body.pLastName,
-                            aEmail: req.body.aEmail,
-                            aAddress: req.body.aAddress,
-                            aPhoneNumber: req.body.aPhoneNumber,
-                            Member: req.body.Member,
-                        },
-                    },
-                }
-            );
-
-            console.log(userFamily),
-
-                userFamily.save(function (err, userFamily) {
+            newFamily.save(function (err, newFamily) {
                     if (err) {
                         res.json({ success: false, msg: 'Failed to save Family Member' })
                     }
@@ -118,6 +97,34 @@ var functions = {
                         res.json({ success: true, msg: 'Successfully Added Family Member' })
                     }
                 })
+
+            // const userFamily = await User.findOneAndUpdate(
+
+            //     { email: req.body.email },
+            //     {
+            //         $push: {
+            //             familyField: {
+            //                 aFirstName: req.body.pFirstName,
+            //                 aLastName: req.body.pLastName,
+            //                 aEmail: req.body.aEmail,
+            //                 aAddress: req.body.aAddress,
+            //                 aPhoneNumber: req.body.aPhoneNumber,
+            //                 Member: req.body.Member,
+            //             },
+            //         },
+            //     }
+            // );
+
+            // console.log(userFamily),
+
+                // userFamily.save(function (err, userFamily) {
+                //     if (err) {
+                //         res.json({ success: false, msg: 'Failed to save Family Member' })
+                //     }
+                //     else {
+                //         res.json({ success: true, msg: 'Successfully Added Family Member' })
+                //     }
+                // })
 
         }
 

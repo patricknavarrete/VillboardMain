@@ -27,7 +27,7 @@ var addFamilySchema = new Schema ({
         require: true,
     },
     userId: {
-        type: mongoose.Schema.Types.ObjectId,
+        type: String,
         required: true
     }
 
