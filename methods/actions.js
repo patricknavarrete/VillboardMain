@@ -590,6 +590,10 @@ var functions = {
                 return res.status(403).send({ success: false, msg: 'Authentication Failed, Account not approved yet' })
 
             }
+
+            if(user.isActive === 'login'){
+              return res.status(403).send({ success: false, msg: 'someone logged in your account ganon' })
+            }
             
 
             user.comparePassword(req.body.password, function (err, isMatch) {
@@ -873,12 +877,37 @@ var functions = {
                             subject: "Test Email", //subject of the email
                             text: sendMessage(`Hi ${req.body.fullName}`,`Thanks!`), //1: for header, 2:body content
                             image: [image] //array of image
+                            
                         });
 
                     })
             })
 
     },
+
+
+    // changerefrNumber: function (req, res) {
+    //     let { newrefrNumber } = req.body;
+    //     newrefrNumber = newrefrNumber.trim();
+
+    //     Payment.findOne({
+    //         ????        : req.body.referenceNumber
+    //     },
+    //         function (err, user) {
+
+    //             Visitor.findOneAndUpdate(
+    //                 { referenceNumber: req.body.refrenceNumber },
+    //                 { $set: { refrNumber: newrefrNumber } },
+    //                 (err, result) => {
+    //                     if (err) return res.status(500).json({ msg: "Error updating timeOut" });
+
+    //                     return res.json({ msg: refrNumber });
+
+    //                 })
+    //         })
+
+    // },
+
 
     changeFirstname: function (req, res) {
         let { newfirstname } = req.body;

@@ -67,6 +67,10 @@ var userSchema = new Schema({
     status : {
         type: String,
         default: "Pending"
+    },
+    isActive: {
+        type: String,
+        default:"logout"
     }
     
 
