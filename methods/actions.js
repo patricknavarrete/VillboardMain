@@ -593,14 +593,22 @@ var functions = {
             }
 
             if(user.isActive === 'login'){
-              return res.status(403).send({ success: false, msg: 'someone logged in your account ganon' })
+              return res.status(403).send({ success: false, msg: 'someone logged in your account' })
             }
             
 
             user.comparePassword(req.body.password, function (err, isMatch) {
                 if (isMatch && !err) {
                     var token = jwt.encode(user, config.secret)
-                    res.json({ success: true, token: token })
+                    User.findOneAndUpdate(
+                        { token: token },
+                        { $set: { isActive: "login" } },
+                        (err, result) => {
+                            if (err) return res.status(500).json({ msg: "" });
+    
+                            return res.json({ success: true, token: token })
+                        })
+                    // res.json({ success: true, token: token })
                 }
                 else {
                     return res.status(403).send({ success: false, msg: 'Authentication failed, wrong email/password' })
@@ -1014,6 +1022,8 @@ var functions = {
             })
 
     },
+
+    
 
     changeRole: function (req, res) {
         let { newrole } = req.body;
