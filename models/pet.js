@@ -12,10 +12,10 @@ var petSchema = new Schema ({
         type: String,
         require: true,
     },
-    pEmail:{
-        type: String,
-        require: true,
-    },
+    // pEmail:{
+    //     type: String,
+    //     require: true,
+    // },
     pAddress:{
         type: String,
         require: true,

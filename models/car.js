@@ -12,10 +12,10 @@ var carSchema = new Schema ({
         type: String,
         require: true,
     },
-    cEmail:{
-        type: String,
-        require: true,
-    },
+    // cEmail:{
+    //     type: String,
+    //     require: true,
+    // },
     cAddress:{
         type: String,
         require: true,

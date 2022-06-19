@@ -10,10 +10,10 @@ var addFamilySchema = new Schema ({
         type: String,
         require: true,
     },
-    aEmail:{
-        type: String,
-        require: true,
-    },
+    // aEmail:{
+    //     type: String,
+    //     require: true,
+    // },
     aAddress: {
         type: String,
         require: true,

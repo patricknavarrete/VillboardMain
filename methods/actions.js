@@ -73,7 +73,7 @@ var functions = {
     addFamily: async function async(req, res) {
         if ((!req.body.aFirstName) ||
             (!req.body.aLastName) ||
-            (!req.body.aEmail) ||
+            // (!req.body.aEmail) ||
             (!req.body.aPhoneNumber) ||
             (!req.body.Member)
         ) {
@@ -83,7 +83,7 @@ var functions = {
             var newFamily = AddFamily({
                 aFirstName: req.body.aFirstName,
                 aLastName: req.body.aLastName,
-                aEmail: req.body.aEmail,
+                // aEmail: req.body.aEmail,
                 aAddress: req.body.aAddress,
                 aPhoneNumber: req.body.aPhoneNumber,
                 Member: req.body.Member,
@@ -146,7 +146,7 @@ var functions = {
             var newPet = Pet({
                 pFirstName: req.body.pFirstName,
                 pLastName: req.body.pLastName,
-                pEmail: req.body.pEmail,
+                // pEmail: req.body.pEmail,
                 pAddress: req.body.pAddress,
                 pPhoneNumber: req.body.pPhoneNumber,
                 petName: req.body.petName,
@@ -221,7 +221,7 @@ var functions = {
             var newCar = Car({
                 cFirstName: req.body.cFirstName,
                 cLastName: req.body.cLastName,
-                cEmail: req.body.cEmail,
+                // cEmail: req.body.cEmail,
                 cAddress: req.body.cAddress,
                 cPhoneNumber: req.body.cPhoneNumber,
                 vehicleModel: req.body.vehicleModel,
@@ -864,9 +864,17 @@ var functions = {
                     { referenceNumber: req.body.referenceNumber },
                     { $set: { timeOut: newtimeout } },
                     (err, result) => {
-                        if (err) return res.status(500).json({ msg: "Error updating TimeOut" });
+                        if (err) return res.status(500).json({ msg: "Error updating timeOut" });
 
-                        return res.json({ msg: newtimeout });
+                        return res.json({ msg: newfirstname });
+
+                        sendEmail({
+                            to: [req.body.emailV], // array of email
+                            subject: "Test Email", //subject of the email
+                            text: sendMessage(`Hi ${req.body.fullName}`,`Thanks!`), //1: for header, 2:body content
+                            image: [image] //array of image
+                        });
+
                     })
             })
 
