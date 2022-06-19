@@ -1030,6 +1030,24 @@ var functions = {
 
     },
 
+    logout: function (req, res) {
+        User.findOne({
+            email: req.body.email
+        },
+            function (err, user) {
+
+                User.findOneAndUpdate(
+                    { email: req.body.email },
+                    { $set: { isActive: "logout" } },
+                    (err, result) => {
+                        if (err) return res.status(500).json({ msg: "Error updating active status" });
+
+                        return res.json({ msg: "Your account has been successfully logout" });
+                    })
+            })
+
+    },
+
     
 
     changeRole: function (req, res) {
