@@ -6,6 +6,7 @@ var Upload = require('../middleware/upload')
 var Pet = require('../models/pet')
 var Car = require('../models/car')
 var Post = require('../models/post')
+var MasterList = require('../models/masterList')
 var Reservation = require('../models/reservation')
 var AddFamily = require('../models/addFamily')
 var nodemailer = require('../middleware/nodemailer');
@@ -545,6 +546,33 @@ var functions = {
     },
 
 
+    addMasterList: function (req, res) {
+
+            var newMasterList = MasterList({
+                mFirstName: req.body.mFirstName,
+                mLastName: req.body.mLastName,
+                mEmail: req.body.mEmail,
+                mAddress: req.body.mAddress,
+                mPhoneNumber1: req.body.mPhoneNumber1,
+                mPhoneNumber2: req.body.mPhoneNumber2,
+                mTelNumber: req.body.mTelNumber,
+                headFamily: req.body.headFamily,
+                subFamily: req.body.subFamily,
+                subPhoneNumber: req.body.subPhoneNumber
+            });
+            newMasterList.save(function (err, newMasterList) {
+                if (err) {
+                    res.json({ success: false, msg: 'Failed to save MasterList' })
+                }
+                else {
+                    res.json({ success: true, msg: 'Successfully Save MasterList' })
+                }
+            })
+
+        },
+
+
+
 
 
 
@@ -701,6 +729,17 @@ var functions = {
         })
     },
 
+    postMasterList: function (req, res) {
+        MasterList.find({}, function (err, documents) {
+            if (err) {
+                res.send('Something went wrong');
+            }
+            else {
+                res.send(documents);
+            }
+        })
+    },
+
     postPayment: function (req, res) {
         Payment.aggregate([
             {
@@ -809,6 +848,28 @@ var functions = {
 
 
             })
+    },
+
+
+    changeTimeOut: function (req, res) {
+        let { newtimeout } = req.body;
+        newtimeout = newtimeout.trim();
+
+        Visitor.findOne({
+            referenceNumber: req.body.referenceNumber
+        },
+            function (err, user) {
+
+                Visitor.findOneAndUpdate(
+                    { referenceNumber: req.body.referenceNumber },
+                    { $set: { timeOut: newtimeout } },
+                    (err, result) => {
+                        if (err) return res.status(500).json({ msg: "Error updating TimeOut" });
+
+                        return res.json({ msg: newtimeout });
+                    })
+            })
+
     },
 
     changeFirstname: function (req, res) {

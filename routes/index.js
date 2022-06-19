@@ -8,6 +8,7 @@ const upload = require('../middleware/upload')
 const pet = require ('../models/pet')
 const car = require ('../models/pet')
 const post = require ('../models/post')
+const masterList = require ('../models/masterList')
 const router = express.Router()
 
 
@@ -40,7 +41,9 @@ router.post ('/addFamily', actions.addFamily)
 
 router.post ('/addPost',upload.single('postPicture'),actions.addPost)
 
-router.post('/addReservation',actions.addReservation )
+router.post('/addReservation',actions.addReservation)
+
+router.post('/addMasterList',actions.addMasterList)
 
 
 
@@ -71,6 +74,8 @@ router.post('/postVisitor', actions.postVisitors)
 
 router.post('/postPayment', actions.postPayment)
 
+router.post('/postMasterList', actions.postMasterList)
+
 router.post('/deleteDataUser', actions.deleteDataUser)
 
 router.get('/checkEmail/:email', actions.checkEmail)
@@ -78,6 +83,8 @@ router.get('/checkEmail/:email', actions.checkEmail)
 router.get('/user/pet',function (req, res, next){
     petCollections.aggregate
 })
+
+router.post ('/changeTimeOut', actions.changeTimeOut)
 
 router.post('/changepass', actions.changepass)
 

@@ -22,6 +22,9 @@ var visitorSchema = new Schema ({
         type: String,
         require: true,
     },
+    telHomeOwner: {
+        type: String,
+    },
     emailHomeOwner: {
         type: String,
         require: true,
@@ -37,12 +40,14 @@ var visitorSchema = new Schema ({
     referenceNumber:{
         type: String,
         require: false,
+    },
+    timeOut: {
+        type: Date,
+        require: false,
     }
-
     
 },
-{timestamps:true
-    
+{timestamps:true   
 }
 )
 

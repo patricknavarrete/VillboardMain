@@ -52,6 +52,10 @@ var paymentSchema = new Schema ({
         type: String,
         default: ""
     },
+    refrNumber: {
+        type: String,
+        unique: true,
+    },
 }, 
 
 {timestamps:true
