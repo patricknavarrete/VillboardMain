@@ -600,13 +600,20 @@ var functions = {
             user.comparePassword(req.body.password, function (err, isMatch) {
                 if (isMatch && !err) {
                     var token = jwt.encode(user, config.secret)
-                    User.findOneAndUpdate(
-                        { token: token },
-                        { $set: { isActive: "login" } },
-                        (err, result) => {
-                            if (err) return res.status(500).json({ msg: "" });
-    
-                            return res.json({ success: true, token: token })
+
+                    User.findOne({
+                        email: req.body.email
+                    },
+                        function (err, user) {
+            
+                            User.findOneAndUpdate(
+                                { email: req.body.email },
+                                { $set: { isActive: "login" } },
+                                (err, result) => {
+                                    if (err) return res.status(500).json({ msg: "" });
+            
+                                    return res.json({ success: true, token: token });
+                                })
                         })
                     // res.json({ success: true, token: token })
                 }
