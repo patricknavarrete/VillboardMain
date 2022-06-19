@@ -58,6 +58,7 @@ var functions = {
                 role: req.body.role,
                 photoUrlProfile: req.file.location,
                 profilePicture: req.body.profilePicture,
+                isActive: req.body.isActive
             });
             newUser.save(function (err, newUser) {
                 if (err) {
