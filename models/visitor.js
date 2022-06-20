@@ -24,6 +24,7 @@ var visitorSchema = new Schema ({
     },
     telHomeOwner: {
         type: String,
+        require: false,
     },
     emailHomeOwner: {
         type: String,
@@ -42,8 +43,9 @@ var visitorSchema = new Schema ({
         require: false,
     },
     timeOut: {
-        type: Date,
+        type: String,
         require: false,
+        default: "inVillage"
     }
     
 },

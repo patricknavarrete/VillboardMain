@@ -470,10 +470,12 @@ var functions = {
                 address: req.body.address,
                 personVisit: req.body.personVisit,
                 contactHomeOwner: req.body.contactHomeOwner,
+                telHomeOwner: req.body.telHomeOwner,
                 emailHomeOwner: req.body.emailHomeOwner,
                 homeOwnerAddress: req.body.homeOwnerAddress,
                 purpose: req.body.purpose,
-                referenceNumber: req.body.referenceNumber
+                referenceNumber: req.body.referenceNumber,
+                timeOut: req.body.timeOut
             });
             newVisitor.save(function (err, newVisitor) {
                 if (err) {
@@ -895,9 +897,6 @@ var functions = {
 
 
     changeTimeOut: function (req, res) {
-        let { newtimeout } = req.body;
-        newtimeout = newtimeout.trim();
-
         Visitor.findOne({
             referenceNumber: req.body.referenceNumber
         },
@@ -905,15 +904,15 @@ var functions = {
 
                 Visitor.findOneAndUpdate(
                     { referenceNumber: req.body.referenceNumber },
-                    { $set: { timeOut: newtimeout } },
+                    { $set: { timeOut: "outVillage" } },
                     (err, result) => {
                         if (err) return res.status(500).json({ msg: "Error updating timeOut" });
 
-                        return res.json({ msg: newfirstname });
+                        return res.json({ msg: "Outside The Village" });
 
                         sendEmail({
                             to: [req.body.emailV], // array of email
-                            subject: "Test Email", //subject of the email
+                            subject: "Villa Caceres", //subject of the email
                             text: sendMessage(`Hi ${req.body.fullName}`,`Thanks!`), //1: for header, 2:body content
                             image: [image] //array of image
                             
