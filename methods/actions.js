@@ -337,6 +337,16 @@ var functions = {
                     res.json({ success: false, msg: 'Failed to save' })
                 }
                 else {
+                   User.findOne({
+                        email: req.body.email
+                    });
+                    sendEmail({
+                        to: [req.body.email], // array of email
+                        subject: "Payment Transaction", //subject of the email
+                        text: sendMessage(`Hi ${req.body.uFirstName}`,`Thank you for uploading your payment transaction thru Villboard, rest assured that our payment is being reviewed thoroughly. Please wait for Villa Caceres response thru email for your payment confirmation. <br><br>Got questions? You can also reply to this email.<br>Visit our Terms and Conditions. <br>(LINK) 
+                        <br><br>Download Villboard Here:<br>(LINK)`), //1: for header, 2:body content
+                        image: [image] //array of image
+                    });
                     res.json({ success: true, msg: 'Transaction has been processed' })
                 }
             })
@@ -552,6 +562,17 @@ var functions = {
                     res.json({ success: false, msg: 'Failed to save' })
                 }
                 else {
+                    User.findOne({
+                        email: req.body.email
+                    });
+                    sendEmail({
+                        to: [req.body.email], // array of email
+                        subject: "Reservation", //subject of the email
+                        text: sendMessage(`Hi ${req.body.rFirstName}`,` Thank you for your reservation thru Villboard application, Villa Caceres would send you and email confirmation if your reservation has been approved via Email <br><br>Got questions? You can also reply to this email.<br>Visit our Terms and Conditions. <br>(LINK) 
+                        <br><br>Download Villboard Here:<br>(LINK)`), //1: for header, 2:body content
+                        image: [image] //array of image
+                    });
+                    
                     res.json({ success: true, msg: 'Reservation would be processed' })
                 }
             })
