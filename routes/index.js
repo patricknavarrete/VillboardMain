@@ -114,4 +114,6 @@ router.post('/approveDeclineTransaction', actions.approveDeclineTransaction)
 
 router.get('/getPendingTransactions', actions.getPendingTransactions)
 
+router.get('/getReservation', actions.getReservation)
+
 module.exports = router

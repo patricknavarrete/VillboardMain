@@ -69,7 +69,8 @@ var functions = {
                     sendEmail({
                         to: [req.body.email], // array of email
                         subject: "Registration", //subject of the email
-                        text: sendMessage(`Hi ${req.body.fullName}`,`Your account registration would be reviewed, please expect a call using this number 09292247988 and a visit to your registered address ${req.body.address}.`), //1: for header, 2:body content
+                        text: sendMessage(`Hi ${req.body.firstName}`,`Your account registration would be reviewed, please expect a call using this number 09292247988 and a visit to your registered address ${req.body.address}. <br><br>Got questions? You can also reply to this email.<br>Visit our Terms and Conditions. <br>(LINK) 
+                        <br><br>Download Villboard Here:<br>(LINK)`), //1: for header, 2:body content
                         image: [image] //array of image
                     });
 
@@ -483,7 +484,8 @@ var functions = {
                     sendEmail({
                         to: [req.body.emailHomeOwner,req.body.emailV], // array of email
                         subject: "Test Email", //subject of the email
-                        text: sendMessage(`Hi ${req.body.fullName}`,`The home owner would be notified by your visit, our security team would confirm this via call to our homeowner.`), //1: for header, 2:body content
+                        text: sendMessage(`Hi ${req.body.fullName}`,`The home owner would be notified by your visit, our security team would confirm this via call to our homeowner. <br><br>Got questions? You can also reply to this email.<br>Visit our Terms and Conditions. <br>(LINK) 
+                        <br><br>Download Villboard Here:<br>(LINK)`), //1: for header, 2:body content
                         image: [image] //array of image
                     });
                     res.json({ success: true, msg: 'Successfully saved' })
@@ -689,6 +691,19 @@ var functions = {
             res.status(500).json({ msg: "Reservation not found", err: err });
         })
     },
+
+    getReservation: function (req, res) {
+    
+        Reservation.find({ rPending: 'approved' || 'APPROVED' }, function (err, result) {
+            if (err) {
+                return res.status(500).json({ msg: "Something went wrong" }); 
+            }      
+            return res.json(result);
+
+        });
+  
+    },
+
 
     postFamily: function (req, res) {
         AddFamily.find({}, function (err, documents) {
@@ -1125,7 +1140,7 @@ var functions = {
                     subject: "Account Registration Approved",
                     text: sendMessage(`Hi ${result.firstName},`, `Your registration has been approved by the ADMIN of Villa Caceres you may now start to enjoy our Mobile Application for Villboard.  <br><br>
                     Got questions? You can also reply to this email <br>
-                    Visit our Terms and Conditions.<br>(LINK) <br><br>
+                    Visit our Terms and Conditions.<br>(LINK)<br><br>
                     
                     Download Villboard Here:(LINK)`),
                     image: [image]
