@@ -56,6 +56,11 @@ var paymentSchema = new Schema ({
         type: String,
         unique: true,
     },
+    email: {
+        type: String,
+        require:true,
+        default:''
+    }
 }, 
 
 {timestamps:true

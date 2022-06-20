@@ -323,7 +323,8 @@ var functions = {
                 photoUrl: req.file.location,
                 proofPayment: req.body.proofPayment,
                 // paymentDate:  paymentDate,
-                userId: mongoose.Types.ObjectId(req.body.userId)
+                userId: mongoose.Types.ObjectId(req.body.userId),
+                email: req.body.email
                
                 // pPending: req.body.pPending
             });
@@ -337,11 +338,9 @@ var functions = {
                     res.json({ success: false, msg: 'Failed to save' })
                 }
                 else {
-                   User.findOne({
-                        email: req.body.email
-                    });
+
                     sendEmail({
-                        to: [req.body.email], // array of email
+                        to: req.body.email, // array of email
                         subject: "Payment Transaction", //subject of the email
                         text: sendMessage(`Hi ${req.body.uFirstName}`,`Thank you for uploading your payment transaction thru Villboard, rest assured that our payment is being reviewed thoroughly. Please wait for Villa Caceres response thru email for your payment confirmation. <br><br>Got questions? You can also reply to this email.<br>Visit our Terms and Conditions. <br>(LINK) 
                         <br><br>Download Villboard Here:<br>(LINK)`), //1: for header, 2:body content
@@ -529,6 +528,7 @@ var functions = {
                 reservationTime: req.body.reservationTime,
                 reservationDate: req.body.reservationDate,
                 rPending: req.body.rPending,
+                email: req.body.email
             });
 
 
@@ -562,20 +562,15 @@ var functions = {
                     res.json({ success: false, msg: 'Failed to save' })
                 }
                 else {
-
-                    User.findOne({
-                        userId: mongoose.Types.ObjectId(req.body.userId),
-                    }, function (err, user) {
-                        
+                    
                     sendEmail({
-                        to: user.email, // array of email
+                        to: req.body.email, // array of email
                         subject: "Reservation", //subject of the email
                         text: sendMessage(`Hi ${req.body.rFirstName}`,` Thank you for your reservation thru Villboard application, Villa Caceres would send you and email confirmation if your reservation has been approved via Email <br><br>Got questions? You can also reply to this email.<br>Visit our Terms and Conditions. <br>(LINK) 
                         <br><br>Download Villboard Here:<br>(LINK)`), //1: for header, 2:body content
                         image: [image] //array of image
                     });
 
-                })
                     res.json({ success: true, msg: 'Reservation would be processed' })
                 }
             })
