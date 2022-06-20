@@ -337,7 +337,7 @@ var functions = {
                     res.json({ success: false, msg: 'Failed to save' })
                 }
                 else {
-                    res.json({ success: true, msg: 'Successfully saved' })
+                    res.json({ success: true, msg: 'Transaction has been processed' })
                 }
             })
 
@@ -552,7 +552,7 @@ var functions = {
                     res.json({ success: false, msg: 'Failed to save' })
                 }
                 else {
-                    res.json({ success: true, msg: 'Successfully saved' })
+                    res.json({ success: true, msg: 'Reservation would be processed' })
                 }
             })
         }
@@ -879,7 +879,7 @@ var functions = {
                                     (err, result) => {
                                         if (err) return res.status(500).json({ msg: "Error updating password" });
 
-                                        return res.json({ msg: newpass });
+                                        return res.json({ msg: "Successfully Changed" });
                                     }
                                 )
                             })
