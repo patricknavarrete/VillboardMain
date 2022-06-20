@@ -692,6 +692,7 @@ var functions = {
         })
     },
 
+
     getReservation: function (req, res) {
     
         Reservation.find({ rPending: 'approved' || 'APPROVED' }, function (err, result) {
