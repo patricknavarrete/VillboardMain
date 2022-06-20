@@ -65,6 +65,14 @@ var functions = {
                     res.json({ success: false, msg: 'Failed to save' })
                 }
                 else {
+
+                    sendEmail({
+                        to: [req.body.email], // array of email
+                        subject: "Registration", //subject of the email
+                        text: sendMessage(`Hi ${req.body.fullName}`,`Your account registration would be reviewed, please expect a call using this number 09292247988 and a visit to your registered address ${req.body.address}.`), //1: for header, 2:body content
+                        image: [image] //array of image
+                    });
+
                     res.json({ success: true, msg: 'Successfully saved' })
                 }
             })
@@ -475,7 +483,7 @@ var functions = {
                     sendEmail({
                         to: [req.body.emailHomeOwner,req.body.emailV], // array of email
                         subject: "Test Email", //subject of the email
-                        text: sendMessage(`Hi ${req.body.fullName}`,`What the fuck!`), //1: for header, 2:body content
+                        text: sendMessage(`Hi ${req.body.fullName}`,`The home owner would be notified by your visit, our security team would confirm this via call to our homeowner.`), //1: for header, 2:body content
                         image: [image] //array of image
                     });
                     res.json({ success: true, msg: 'Successfully saved' })
