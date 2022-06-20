@@ -562,17 +562,20 @@ var functions = {
                     res.json({ success: false, msg: 'Failed to save' })
                 }
                 else {
+
                     User.findOne({
-                        email: req.body.email
-                    });
+                        userId: mongoose.Types.ObjectId(req.body.userId),
+                    }, function (err, user) {
+                        
                     sendEmail({
-                        to: [req.body.email], // array of email
+                        to: user.email, // array of email
                         subject: "Reservation", //subject of the email
                         text: sendMessage(`Hi ${req.body.rFirstName}`,` Thank you for your reservation thru Villboard application, Villa Caceres would send you and email confirmation if your reservation has been approved via Email <br><br>Got questions? You can also reply to this email.<br>Visit our Terms and Conditions. <br>(LINK) 
                         <br><br>Download Villboard Here:<br>(LINK)`), //1: for header, 2:body content
                         image: [image] //array of image
                     });
-                    
+
+                })
                     res.json({ success: true, msg: 'Reservation would be processed' })
                 }
             })
@@ -1112,6 +1115,24 @@ var functions = {
                     })
             })
 
+    },
+
+    resetPassword: function (req,res){
+
+        User.findOne({
+            email: req.body.email
+        },
+            function (err, user) {
+
+                User.findOneAndUpdate(
+                    { email: req.body.email },
+                    { $set: { role: newrole } },
+                    (err, result) => {
+                        if (err) return res.status(500).json({ msg: "Error updating Role" });
+
+                        return res.json({ msg: newrole });
+                    })
+            })
     },
 
     approveDeclineAccount: async function (req, res) {

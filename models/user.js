@@ -71,6 +71,10 @@ var userSchema = new Schema({
     isActive: {
         type: String,
         default:"logout"
+    },
+    resetLink:{
+        data: String,
+        default:''
     }
     
 
