@@ -1117,31 +1117,27 @@ var functions = {
     },
 
     resetPassword: function (req,res){
-        
+        var a = "";
+
         User.findOne({
             email: req.body.email
         },
             function (err, user) {
-               const a = user._id
-               
+               a = user._id;
+
                 if (!user) {
                     return res.status(403).send({ success: false, msg: 'User not found' })
                 }
-
-
                 sendEmail({
                     to: req.body.email, // array of email
                     subject: "ResetPassword", //subject of the email
                     text: sendMessage(`Reset Password. Click: <a href="https://villboard-23c49.web.app/Forgot_Password?resetPassword=${a}" style='color:blue, background-color:white'> to reset password </a>  <br><br>Got questions? You can also reply to this email.<br>Visit our Terms and Conditions. <br> <a href="https://villboard-23c49.web.app/Terms_conditions" style='color:blue,background-color:white'>https://villboard-23c49.web.app/Terms_conditions </a> 
                     <br><br>Download Villboard Here:<br><a href="https://drive.google.com/file/d/18iBQu778YpjXTBSsuMAjg7RfiKKXq-1a/view?usp=sharing" style='color:blue,background-color:white'>https://drive.google.com/file/d/18iBQu778YpjXTBSsuMAjg7RfiKKXq-1a/view?usp=sharing </a>`), //1: for header, 2:body content
                     image: [image] //array of image
-                });
-
-
-
-
-
+                    });
             })
+
+       
     },
 
     updatePassword: function (req,res){

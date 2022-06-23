@@ -47,10 +47,11 @@ const sendEmail = (options) => {
 
     transporter.sendMail(mailOptions, function (err, info) {
         if(err){
-            console.log(err);
+            console.log(`Something is wrong : ${err}`);
         }
         else{
-            console.log(info);
+            console.log(`Success : ${info}`);
+            
         }
     })
 }
