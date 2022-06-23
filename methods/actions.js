@@ -58,7 +58,7 @@ var functions = {
                 role: req.body.role,
                 photoUrlProfile: req.file.location,
                 profilePicture: req.body.profilePicture,
-                isActive: req.body.isActive
+                isActive: req.body.isActive,
             });
             newUser.save(function (err, newUser) {
                 if (err) {
@@ -495,7 +495,7 @@ var functions = {
                     sendEmail({
                         to: [req.body.emailHomeOwner,req.body.emailV], // array of email
                         subject: "Test Email", //subject of the email
-                        text: sendMessage(`Hi ${req.body.fullName}`,`The home owner would be notified by your visit, our security team would confirm this via call to our homeowner. <br><br>Got questions? You can also reply to this email.<br>Visit our Terms and Conditions. <br>(LINK) 
+                        text: sendMessage(`Hi ${req.body.fullName}`,`This would serve as notification for both Homeowners and Visitors, for security purposes of the village, the homeowner would be called for this visit by our security team in the village. <br><br>Got questions? You can also reply to this email.<br>Visit our Terms and Conditions. <br>(LINK) 
                         <br><br>Download Villboard Here:<br>(LINK)`), //1: for header, 2:body content
                         image: [image] //array of image
                     });
@@ -1117,24 +1117,23 @@ var functions = {
     },
 
     resetPassword: function (req,res){
-            console.log(req.body.email)
-
+        
         User.findOne({
             email: req.body.email
         },
             function (err, user) {
+               const a = user._id
                 var token = jwt.encode(user, config.secret)
 
                 if (!user) {
                     return res.status(403).send({ success: false, msg: 'User not found' })
                 }
 
-                User.findOneAndUpdate({ email: req.body.email },{ $set: {resetLink:token }})
 
                 sendEmail({
                     to: req.body.email, // array of email
                     subject: "ResetPassword", //subject of the email
-                    text: sendMessage(`Reset Password. LINK: ${token}  <br><br>Got questions? You can also reply to this email.<br>Visit our Terms and Conditions. <br>(LINK) 
+                    text: sendMessage(`Reset Password. Click: <a href="https://villboard-23c49.web.app/Forgot_Password?resetPassword=${a}"> to reset password </a>  <br><br>Got questions? You can also reply to this email.<br>Visit our Terms and Conditions. <br>(LINK) 
                     <br><br>Download Villboard Here:<br>(LINK)`), //1: for header, 2:body content
                     image: [image] //array of image
                 });
@@ -1144,6 +1143,40 @@ var functions = {
 
 
             })
+    },
+
+    updatePassword: function (req,res){
+        let {newpass} = req.body;
+        newpass = newpass.trim();
+
+        console.log(newpass)
+
+        User.findOne({
+            _id: req.body._id
+        },
+       
+            function (err, user) {
+                        bcrypt.genSalt(10, function (err, salt) {
+                            bcrypt.hash(newpass, salt, function (err, hash) {
+
+                                newpass = hash;
+
+                                User.findOneAndUpdate(
+                                    { _id: req.body._id },
+                                    { $set: { password: newpass } },
+                                    (err, result) => {
+                                        if (err) return res.status(500).json({ msg: "Error updating password" });
+
+                                        return res.json({ msg: "Successfully Changed" });
+                                    }
+                                )
+                            })
+                        })
+
+                 
+                    }
+            )
+
     },
 
     approveDeclineAccount: async function (req, res) {
@@ -1255,7 +1288,7 @@ var functions = {
                 await sendEmail({
                     to: reserveItem.user_reservation.email,
                     subject: "Reservation Approved",
-                    text: sendMessage(`Hi ${reserveItem.rFirstName},`, `Congratulations! Your reservation has been approved by the ADMIN of Villa Caceres. For the reservation of ${reserveItem.venue} with the time of ${moment(reserveItem.reservationDate).format('ll')} thank you for reservation. <br>Got questions? You can also reply to this email.<br>Visit our Terms and Conditions. <br>(LINK) 
+                    text: sendMessage(`Hi ${reserveItem.rFirstName},`, `Congratulations! Your reservation has been approved by the ADMIN of Villa Caceres. For the reservation of ${reserveItem.venue} with the date and time of ${moment(reserveItem.reservationDate).format('ll')},${reserveItem.reservationTime}thank you for reservation. <br>Got questions? You can also reply to this email.<br>Visit our Terms and Conditions. <br>(LINK) 
                     <br><br>Download Villboard Here:<br>(LINK)
                     `),
                     image: [image]
@@ -1306,7 +1339,7 @@ var functions = {
                 await sendEmail({
                     to: transItem.user_payment.email,
                     subject: "Payment Declined",
-                    text: sendMessage(`Hi ${transItem.uFirstName},`, `Sorry! Your payment receipt has been declined by the ADMIN of Villa Caceres.${reasonText} <br><br>Got questions? You can also reply to this email.<br>Visit our Terms and Conditions. <br>(LINK) 
+                    text: sendMessage(`Hi ${transItem.uFirstName},`, `Sorry! Your payment receipt has been declined by the ADMIN of Villa Caceres. due to the following reasons Incorrect reference number, Image is blurry, Same reference number with other transactions <br><br>Got questions? You can also reply to this email.<br>Visit our Terms and Conditions. <br>(LINK) 
                     <br><br>Download Villboard Here:<br>(LINK)
                     `),
                     image: [image]

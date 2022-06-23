@@ -76,6 +76,10 @@ var userSchema = new Schema({
         type: String,
         default:''
     },
+    // userId: {
+    //     type: mongoose.Schema.Types.ObjectId,
+    //     required: true
+    // },
     
 
 },

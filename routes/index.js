@@ -104,6 +104,8 @@ router.post('/resetPassword',actions.resetPassword)
 
 router.post('/logout',actions.logout)
 
+router.post('/updatePassword',actions.updatePassword)
+
 router.post('/approveDeclineAccount', actions.approveDeclineAccount)
 
 router.get('/getPendingAccounts', actions.getPendingAccounts)
