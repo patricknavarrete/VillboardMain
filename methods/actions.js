@@ -69,8 +69,8 @@ var functions = {
                     sendEmail({
                         to: [req.body.email], // array of email
                         subject: "Registration", //subject of the email
-                        text: sendMessage(`Hi ${req.body.firstName}`,`Your account registration would be reviewed, please expect a call using this number 09292247988 and a visit to your registered address ${req.body.address}. <br><br>Got questions? You can also reply to this email.<br>Visit our Terms and Conditions. <br>(LINK) 
-                        <br><br>Download Villboard Here:<br>(LINK)`), //1: for header, 2:body content
+                        text: sendMessage(`Hi ${req.body.firstName}`,`Your account registration would be reviewed, please expect a call using this number 09292247988 and a visit to your registered address ${req.body.address}. <br><br>Got questions? You can also reply to this email.<br>Visit our Terms and Conditions. <br> <a href="https://villboard-23c49.web.app/Terms_conditions"> </a> 
+                        <br><br>Download Villboard Here:<br><a href="https://drive.google.com/file/d/18iBQu778YpjXTBSsuMAjg7RfiKKXq-1a/view?usp=sharing"> </a>`), //1: for header, 2:body content
                         image: [image] //array of image
                     });
 
@@ -579,7 +579,6 @@ var functions = {
 
 
     addMasterList: function (req, res) {
-
             var newMasterList = MasterList({
                 mFirstName: req.body.mFirstName,
                 mLastName: req.body.mLastName,
@@ -592,7 +591,6 @@ var functions = {
                 subFamily: req.body.subFamily,
                 subPhoneNumber: req.body.subPhoneNumber,
                 userId: mongoose.Types.ObjectId(req.body.userId),
-                
             });
             newMasterList.save(function (err, newMasterList) {
                 if (err) {
