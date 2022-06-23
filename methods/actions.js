@@ -566,8 +566,8 @@ var functions = {
                     sendEmail({
                         to: req.body.email, // array of email
                         subject: "Reservation", //subject of the email
-                        text: sendMessage(`Hi ${req.body.rFirstName}`,` Thank you for your reservation thru Villboard application, Villa Caceres would send you and email confirmation if your reservation has been approved via Email <br><br>Got questions? You can also reply to this email.<br>Visit our Terms and Conditions. <br> <a href="https://villboard-23c49.web.app/Terms_conditions"> </a> 
-                        <br><br>Download Villboard Here:<br><a href="https://drive.google.com/file/d/18iBQu778YpjXTBSsuMAjg7RfiKKXq-1a/view?usp=sharing"> </a>`), //1: for header, 2:body content
+                        text: sendMessage(`Hi ${req.body.rFirstName}`,` Thank you for your reservation thru Villboard application, Villa Caceres would send you and email confirmation if your reservation has been approved via Email <br><br>Got questions? You can also reply to this email.<br>Visit our Terms and Conditions. <br> <a href="https://villboard-23c49.web.app/Terms_conditions"> https://villboard-23c49.web.app/Terms_conditions </a> 
+                        <br><br>Download Villboard Here:<br><a href="https://drive.google.com/file/d/18iBQu778YpjXTBSsuMAjg7RfiKKXq-1a/view?usp=sharing"> https://drive.google.com/file/d/18iBQu778YpjXTBSsuMAjg7RfiKKXq-1a/view?usp=sharing</a>`), //1: for header, 2:body content
                         image: [image] //array of image
                     });
 
@@ -1135,9 +1135,9 @@ var functions = {
                     <br><br>Download Villboard Here:<br><a href="https://drive.google.com/file/d/18iBQu778YpjXTBSsuMAjg7RfiKKXq-1a/view?usp=sharing" style='color:blue,background-color:white'>https://drive.google.com/file/d/18iBQu778YpjXTBSsuMAjg7RfiKKXq-1a/view?usp=sharing </a>`), //1: for header, 2:body content
                     image: [image] //array of image
                     });
+                    
+                res.sendStatus(202);
             })
-
-       
     },
 
     updatePassword: function (req,res){
