@@ -73,9 +73,9 @@ var userSchema = new Schema({
         default:"logout"
     },
     resetLink:{
-        data: String,
+        type: String,
         default:''
-    }
+    },
     
 
 },

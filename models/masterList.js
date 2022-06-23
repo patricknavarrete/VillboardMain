@@ -31,7 +31,15 @@ var masterListSchema = new Schema ({
     },
     subPhoneNumber: {
         type: String,
-    }
+    },
+    userId: {
+        type: mongoose.Schema.Types.ObjectId,
+    },
+    // status:{
+    //     type: String,
+    //     default: "Pending"
+    // } 
+    
 
     
  },

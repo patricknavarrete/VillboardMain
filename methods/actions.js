@@ -590,7 +590,9 @@ var functions = {
                 mTelNumber: req.body.mTelNumber,
                 headFamily: req.body.headFamily,
                 subFamily: req.body.subFamily,
-                subPhoneNumber: req.body.subPhoneNumber
+                subPhoneNumber: req.body.subPhoneNumber,
+                userId: mongoose.Types.ObjectId(req.body.userId),
+                
             });
             newMasterList.save(function (err, newMasterList) {
                 if (err) {
@@ -626,6 +628,10 @@ var functions = {
             if(user.isActive === 'login'){
               return res.status(403).send({ success: false, msg: 'someone logged in your account' })
             }
+
+            // if(user.role === ['admin','security']){
+            //     return res.status(403).send({ success: false, msg: 'Please login to our website if you are a Admin/Security' })
+            //   }
             
 
             user.comparePassword(req.body.password, function (err, isMatch) {
@@ -1113,20 +1119,32 @@ var functions = {
     },
 
     resetPassword: function (req,res){
+            console.log(req.body.email)
 
         User.findOne({
             email: req.body.email
         },
             function (err, user) {
+                var token = jwt.encode(user, config.secret)
 
-                User.findOneAndUpdate(
-                    { email: req.body.email },
-                    { $set: { role: newrole } },
-                    (err, result) => {
-                        if (err) return res.status(500).json({ msg: "Error updating Role" });
+                if (!user) {
+                    return res.status(403).send({ success: false, msg: 'User not found' })
+                }
 
-                        return res.json({ msg: newrole });
-                    })
+                User.findOneAndUpdate({ email: req.body.email },{ $set: {resetLink:token }})
+
+                sendEmail({
+                    to: req.body.email, // array of email
+                    subject: "ResetPassword", //subject of the email
+                    text: sendMessage(`Reset Password. LINK: ${token}  <br><br>Got questions? You can also reply to this email.<br>Visit our Terms and Conditions. <br>(LINK) 
+                    <br><br>Download Villboard Here:<br>(LINK)`), //1: for header, 2:body content
+                    image: [image] //array of image
+                });
+
+
+
+
+
             })
     },
 

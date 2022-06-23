@@ -100,6 +100,8 @@ router.post('/changePhonenumber', actions.changePhonenumber)
 
 router.post('/changeRole',actions.changeRole)
 
+router.post('/resetPassword',actions.resetPassword)
+
 router.post('/logout',actions.logout)
 
 router.post('/approveDeclineAccount', actions.approveDeclineAccount)
