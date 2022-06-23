@@ -1131,8 +1131,8 @@ var functions = {
                 sendEmail({
                     to: req.body.email, // array of email
                     subject: "ResetPassword", //subject of the email
-                    text: sendMessage(`Reset Password. Click: <a href="https://villboard-23c49.web.app/Forgot_Password?resetPassword=${a}" style='color:blue, background-color:white'> to reset password </a>  <br><br>Got questions? You can also reply to this email.<br>Visit our Terms and Conditions. <br> <a href="https://villboard-23c49.web.app/Terms_conditions" style='color:blue,background-color:white'>https://villboard-23c49.web.app/Terms_conditions </a> 
-                    <br><br>Download Villboard Here:<br><a href="https://drive.google.com/file/d/18iBQu778YpjXTBSsuMAjg7RfiKKXq-1a/view?usp=sharing" style='color:blue,background-color:white'>https://drive.google.com/file/d/18iBQu778YpjXTBSsuMAjg7RfiKKXq-1a/view?usp=sharing </a>`), //1: for header, 2:body content
+                    text: sendMessage(`Hi ${req.body.email}`,`Reset Password. Click:<a href="https://villboard-23c49.web.app/Forgot_Password?resetPassword=${a}" style='color:blue'>here</a>to reset password <br>Got questions? You can also reply to this email.<br>Visit our Terms and Conditions. <p style="background:white"><a href="https://villboard-23c49.web.app/Terms_conditions" style='color:blue'>https://villboard-23c49.web.app/Terms_conditions</a></p>
+                    <p style="background:white">Download Villboard Here:<br><br><a href="https://drive.google.com/file/d/18iBQu778YpjXTBSsuMAjg7RfiKKXq-1a/view?usp=sharing" style='color:blue'>https://drive.google.com/file/d/18iBQu778YpjXTBSsuMAjg7RfiKKXq-1a/view?usp=sharing </a></p>`), //1: for header, 2:body content
                     image: [image] //array of image
                     });
                     
@@ -1334,7 +1334,7 @@ var functions = {
                     to: transItem.user_payment.email,
                     subject: "Payment Declined",
                     text: sendMessage(`Hi ${transItem.uFirstName},`, `Sorry! Your payment receipt has been declined by the ADMIN of Villa Caceres. due to the following reasons Incorrect reference number, Image is blurry, Same reference number with other transactions <br><br>Got questions? You can also reply to this email.<br>Visit our Terms and Conditions. <br> <a href="https://villboard-23c49.web.app/Terms_conditions"> </a> 
-                    <br><br>Download Villboard Here:<br><a href="https://drive.google.com/file/d/18iBQu778YpjXTBSsuMAjg7RfiKKXq-1a/view?usp=sharing"> </a>
+                    <br><br>Download Villboard Here:<br><a href=""> </a>
                     `),
                     image: [image]
                 });
@@ -1377,19 +1377,24 @@ const sendMessage = (header, text) => {
         }
         h1{
             font-family: 'PT Sans', sans-serif;
-            color: black;
+            color:black;
         }
         p{
             font-family: 'Open Sans', sans-serif;
+            color: black;
         }
         a{
-            background: #FE9C8F;
+            background: #fff;
             cursor: pointer; 
             color: white; 
             padding: 10px; 
             width: 80%; 
             margin: auto;
             border: none;
+        }
+        h1 a {
+            text-decoration:none;
+            color:black;
         }
       
         @media (min-width: 701) and (max-width: 1000px){
@@ -1414,7 +1419,7 @@ const sendMessage = (header, text) => {
             <center>
                 <img src="cid:bannerimage12345" height="150" width="150" alt="Logo"/> 
             </center>
-            <h1>${header}</h1> <br><br>
+            <h1>${header}</h1><br>
             <p style="font-size:120%;"> ${text} </p><br>
         </div>
     </body>
