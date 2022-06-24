@@ -69,8 +69,8 @@ var functions = {
                     sendEmail({
                         to: [req.body.email], // array of email
                         subject: "Registration", //subject of the email
-                        text: sendMessage(`Hi ${req.body.firstName}`,`Your account registration would be reviewed, please expect a call using this number 09292247988 and a visit to your registered address ${req.body.address}. <br><br>Got questions? You can also reply to this email.<br>Visit our Terms and Conditions. <br> <a href="https://villboard-23c49.web.app/Terms_conditions"> </a> 
-                        <br><br>Download Villboard Here:<br><a href="https://drive.google.com/file/d/18iBQu778YpjXTBSsuMAjg7RfiKKXq-1a/view?usp=sharing"> </a>`), //1: for header, 2:body content
+                        text: sendMessage(`Hi ${req.body.firstName}`,`Your account registration would be reviewed, please expect a call using this number 09292247988 and a visit to your registered address ${req.body.address}. <br><br>Got questions? You can also reply to this email.<br>Visit our Terms and Conditions. <br> <a href="https://villboard-23c49.web.app/Terms_conditions"> https://villboard-23c49.web.app/Terms_conditions </a> 
+                        <br><br>Download Villboard Here:<br><a href="https://drive.google.com/drive/folders/1tjAoLTgRIkzO87zzJYvdaWxUMvzfNk4_?usp=sharing"> https://drive.google.com/drive/folders/1tjAoLTgRIkzO87zzJYvdaWxUMvzfNk4_?usp=sharing </a>`), //1: for header, 2:body content
                         image: [image] //array of image
                     });
 
@@ -342,8 +342,8 @@ var functions = {
                     sendEmail({
                         to: req.body.email, // array of email
                         subject: "Payment Transaction", //subject of the email
-                        text: sendMessage(`Hi ${req.body.uFirstName}`,`Thank you for uploading your payment transaction thru Villboard, rest assured that our payment is being reviewed thoroughly. Please wait for Villa Caceres response thru email for your payment confirmation. <br><br>Got questions? You can also reply to this email.<br><br>Got questions? You can also reply to this email.<br>Visit our Terms and Conditions. <br> <a href="https://villboard-23c49.web.app/Terms_conditions"> </a> 
-                        <br><br>Download Villboard Here:<br><a href="https://drive.google.com/file/d/18iBQu778YpjXTBSsuMAjg7RfiKKXq-1a/view?usp=sharing"> </a>`), //1: for header, 2:body content
+                        text: sendMessage(`Hi ${req.body.uFirstName}`,`Thank you for uploading your payment transaction thru Villboard, rest assured that our payment is being reviewed thoroughly. Please wait for Villa Caceres response thru email for your payment confirmation. <br><br> <a href="https://villboard-23c49.web.app/Terms_conditions"> https://villboard-23c49.web.app/Terms_conditions </a> 
+                        <br><br>Download Villboard Here:<br><a href="https://drive.google.com/drive/folders/1tjAoLTgRIkzO87zzJYvdaWxUMvzfNk4_?usp=sharing"> https://drive.google.com/drive/folders/1tjAoLTgRIkzO87zzJYvdaWxUMvzfNk4_?usp=sharing </a>`), //1: for header, 2:body content
                         image: [image] //array of image
                     });
                     res.json({ success: true, msg: 'Transaction has been processed' })
@@ -495,8 +495,8 @@ var functions = {
                     sendEmail({
                         to: [req.body.emailHomeOwner,req.body.emailV], // array of email
                         subject: "Test Email", //subject of the email
-                        text: sendMessage(`Hi ${req.body.fullName}`,`This would serve as notification for both Homeowners and Visitors, for security purposes of the village, the homeowner would be called for this visit by our security team in the village. <br><br>Got questions? You can also reply to this email.<br>Visit our Terms and Conditions. <br> <a href="https://villboard-23c49.web.app/Terms_conditions"> </a> 
-                        <br><br>Download Villboard Here:<br><a href="https://drive.google.com/file/d/18iBQu778YpjXTBSsuMAjg7RfiKKXq-1a/view?usp=sharing"> </a>`), //1: for header, 2:body content
+                        text: sendMessage(`Hi ${req.body.fullName}`,`This would serve as notification for both Homeowners and Visitors, for security purposes of the village, the homeowner would be called for this visit by our security team in the village. <br><br> <a href="https://villboard-23c49.web.app/Terms_conditions"> https://villboard-23c49.web.app/Terms_conditions </a> 
+                        <br><br>Download Villboard Here:<br><a href="https://drive.google.com/drive/folders/1tjAoLTgRIkzO87zzJYvdaWxUMvzfNk4_?usp=sharing"> https://drive.google.com/drive/folders/1tjAoLTgRIkzO87zzJYvdaWxUMvzfNk4_?usp=sharing </a>`), //1: for header, 2:body content
                         image: [image] //array of image
                     });
                     res.json({ success: true, msg: 'Successfully saved' })
@@ -566,8 +566,8 @@ var functions = {
                     sendEmail({
                         to: req.body.email, // array of email
                         subject: "Reservation", //subject of the email
-                        text: sendMessage(`Hi ${req.body.rFirstName}`,` Thank you for your reservation thru Villboard application, Villa Caceres would send you and email confirmation if your reservation has been approved via Email <br><br>Got questions? You can also reply to this email.<br>Visit our Terms and Conditions. <br> <a href="https://villboard-23c49.web.app/Terms_conditions"> https://villboard-23c49.web.app/Terms_conditions </a> 
-                        <br><br>Download Villboard Here:<br><a href="https://drive.google.com/file/d/18iBQu778YpjXTBSsuMAjg7RfiKKXq-1a/view?usp=sharing"> https://drive.google.com/file/d/18iBQu778YpjXTBSsuMAjg7RfiKKXq-1a/view?usp=sharing</a>`), //1: for header, 2:body content
+                        text: sendMessage(`Hi ${req.body.rFirstName}`,` Thank you for your reservation thru Villboard application, Villa Caceres would send you and email confirmation if your reservation has been approved via Email <br><br><a href="https://villboard-23c49.web.app/Terms_conditions"> https://villboard-23c49.web.app/Terms_conditions </a> 
+                        <br><br>Download Villboard Here:<br><a href="https://drive.google.com/drive/folders/1tjAoLTgRIkzO87zzJYvdaWxUMvzfNk4_?usp=sharing"> https://drive.google.com/drive/folders/1tjAoLTgRIkzO87zzJYvdaWxUMvzfNk4_?usp=sharing </a>`), //1: for header, 2:body content
                         image: [image] //array of image
                     });
 
@@ -1131,8 +1131,8 @@ var functions = {
                 sendEmail({
                     to: req.body.email, // array of email
                     subject: "ResetPassword", //subject of the email
-                    text: sendMessage(`Hi ${req.body.email}`,`Reset Password. Click:<a href="https://villboard-23c49.web.app/Forgot_Password?resetPassword=${a}" style='color:blue'>here</a>to reset password <br>Got questions? You can also reply to this email.<br>Visit our Terms and Conditions. <p style="background:white"><a href="https://villboard-23c49.web.app/Terms_conditions" style='color:blue'>https://villboard-23c49.web.app/Terms_conditions</a></p>
-                    <p style="background:white">Download Villboard Here:<br><br><a href="https://drive.google.com/file/d/18iBQu778YpjXTBSsuMAjg7RfiKKXq-1a/view?usp=sharing" style='color:blue'>https://drive.google.com/file/d/18iBQu778YpjXTBSsuMAjg7RfiKKXq-1a/view?usp=sharing </a></p>`), //1: for header, 2:body content
+                    text: sendMessage(`Hi ${req.body.email}`,`Reset Password. Click:<a href="https://villboard-23c49.web.app/Forgot_Password?resetPassword=${a}" style='color:blue'>here</a>to reset password <br> <a href="https://villboard-23c49.web.app/Terms_conditions"> https://villboard-23c49.web.app/Terms_conditions </a> 
+                    <br><br>Download Villboard Here:<br><a href="https://drive.google.com/drive/folders/1tjAoLTgRIkzO87zzJYvdaWxUMvzfNk4_?usp=sharing"> https://drive.google.com/drive/folders/1tjAoLTgRIkzO87zzJYvdaWxUMvzfNk4_?usp=sharing </a></p>`), //1: for header, 2:body content
                     image: [image] //array of image
                     });
                     
@@ -1168,7 +1168,14 @@ var functions = {
                             })
                         })
 
-                 
+                        sendEmail({
+                            to: req.body.email, // array of email
+                            subject: "Reservation", //subject of the email
+                            text: sendMessage(`Hi ${req.body.email}`,` You have successfully change your password. <br><br><a href="https://villboard-23c49.web.app/Terms_conditions"> https://villboard-23c49.web.app/Terms_conditions </a> 
+                            <br><br>Download Villboard Here:<br><a href="https://drive.google.com/drive/folders/1tjAoLTgRIkzO87zzJYvdaWxUMvzfNk4_?usp=sharing"> https://drive.google.com/drive/folders/1tjAoLTgRIkzO87zzJYvdaWxUMvzfNk4_?usp=sharing </a>`), //1: for header, 2:body content
+                            image: [image] //array of image
+                        });
+
                     }
             )
 
@@ -1193,9 +1200,9 @@ var functions = {
                     *Land Title <br>(Picture)<br>
                     
                     Got questions? You can also reply to this email<br>
-                    Visit our Terms and Conditions. <br> <a href="https://villboard-23c49.web.app/Terms_conditions"> </a> <br><br>
+                    Visit our Terms and Conditions. <br> <a href="https://villboard-23c49.web.app/Terms_conditions"> https://villboard-23c49.web.app/Terms_conditions </a> <br><br>
                     
-                    Download Villboard Here:<br><a href="https://drive.google.com/file/d/18iBQu778YpjXTBSsuMAjg7RfiKKXq-1a/view?usp=sharing"> </a>`),
+                    Download Villboard Here:<br><a href="https://drive.google.com/drive/folders/1tjAoLTgRIkzO87zzJYvdaWxUMvzfNk4_?usp=sharing"> https://drive.google.com/drive/folders/1tjAoLTgRIkzO87zzJYvdaWxUMvzfNk4_?usp=sharing"> </a>`),
                     image: [image]
                     //link
                     //villacasereser.com/emailacknowledge.php/post?id="1234",acknowledge="confirmed"
@@ -1220,9 +1227,9 @@ var functions = {
                     subject: "Account Registration Approved",
                     text: sendMessage(`Hi ${result.firstName},`, `Your registration has been approved by the ADMIN of Villa Caceres you may now start to enjoy our Mobile Application for Villboard.  <br><br>
                     Got questions? You can also reply to this email <br>
-                    Visit our Terms and Conditions.<br> <a href="https://villboard-23c49.web.app/Terms_conditions"> </a><br><br>
+                    Visit our Terms and Conditions.<br> <a href="https://villboard-23c49.web.app/Terms_conditions"> https://villboard-23c49.web.app/Terms_condition </a><br><br>
                     
-                    Download Villboard Here:<a href="https://drive.google.com/file/d/18iBQu778YpjXTBSsuMAjg7RfiKKXq-1a/view?usp=sharing"> </a>`),
+                    Download Villboard Here:<a href="https://drive.google.com/drive/folders/1tjAoLTgRIkzO87zzJYvdaWxUMvzfNk4_?usp=sharing"> https://drive.google.com/drive/folders/1tjAoLTgRIkzO87zzJYvdaWxUMvzfNk4_?usp=sharing"> </a>`),
                     image: [image]
                 });
                 return res.json(result);
@@ -1284,15 +1291,15 @@ var functions = {
                     to: reserveItem.user_reservation.email,
                     subject: "Reservation Approved",
                     text: sendMessage(`Hi ${reserveItem.rFirstName},`, `Congratulations! Your reservation has been approved by the ADMIN of Villa Caceres. For the reservation of ${reserveItem.venue} with the date and time of ${moment(reserveItem.reservationDate).format('ll')},${reserveItem.reservationTime}thank you for reservation. <br>Got questions? You can also reply to this email.<br>Visit our Terms and Conditions. <br> <a href="https://villboard-23c49.web.app/Terms_conditions"> </a> 
-                    <br><br>Download Villboard Here:<br><a href="https://drive.google.com/file/d/18iBQu778YpjXTBSsuMAjg7RfiKKXq-1a/view?usp=sharing"> </a>`),
+                    <br><br>Download Villboard Here:<br><a href="https://drive.google.com/drive/folders/1tjAoLTgRIkzO87zzJYvdaWxUMvzfNk4_?usp=sharing"> https://drive.google.com/drive/folders/1tjAoLTgRIkzO87zzJYvdaWxUMvzfNk4_?usp=sharing </a>`),
                     image: [image]
                 });
             } else {
                 await sendEmail({
                     to: reserveItem.user_reservation.email,
                     subject: "Reservation Declined",
-                    text: sendMessage(`Hi ${reserveItem.rFirstName},`, `Sorry! Your reservation has been disapproved by the ADMIN of Villa Caceres. For the reservation of ${reserveItem.venue} with the time of ${moment(reserveItem.reservationDate).format('ll')}.${reasonText} <br>Got questions? You can also reply to this email.<br>Visit our Terms and Conditions. <br> <a href="https://villboard-23c49.web.app/Terms_conditions"> </a> 
-                    <br><br>Download Villboard Here:<br><a href="https://drive.google.com/file/d/18iBQu778YpjXTBSsuMAjg7RfiKKXq-1a/view?usp=sharing"> </a>
+                    text: sendMessage(`Hi ${reserveItem.rFirstName},`, `Sorry! Your reservation has been disapproved by the ADMIN of Villa Caceres. For the reservation of ${reserveItem.venue} with the time of ${moment(reserveItem.reservationDate).format('ll')}.${reasonText} <br>Got questions? You can also reply to this email.<br>Visit our Terms and Conditions. <br> <a href="https://villboard-23c49.web.app/Terms_conditions"> https://villboard-23c49.web.app/Terms_conditions</a> 
+                    <br><br>Download Villboard Here:<br><a href="https://drive.google.com/drive/folders/1tjAoLTgRIkzO87zzJYvdaWxUMvzfNk4_?usp=sharing"> https://drive.google.com/drive/folders/1tjAoLTgRIkzO87zzJYvdaWxUMvzfNk4_?usp=sharing </a>
                     `),
                     image: [image]
                 });
@@ -1324,8 +1331,8 @@ var functions = {
                 await sendEmail({
                     to: transItem.user_payment.email,
                     subject: "Payment Approved",
-                    text: sendMessage(`Hi ${transItem.uFirstName},`, `Congratulations! Your payment receipt has been confirmed by the ADMIN of Villa Caceres. <br><br>Got questions? You can also reply to this email.<br> <a href="https://villboard-23c49.web.app/Terms_conditions"> </a> 
-                    <br><br>Download Villboard Here:<br><a href="https://drive.google.com/file/d/18iBQu778YpjXTBSsuMAjg7RfiKKXq-1a/view?usp=sharing"> </a>
+                    text: sendMessage(`Hi ${transItem.uFirstName},`, `Congratulations! Your payment receipt has been confirmed by the ADMIN of Villa Caceres. <br><br>Got questions? You can also reply to this email.<br> <a href="https://villboard-23c49.web.app/Terms_conditions"> https://villboard-23c49.web.app/Terms_conditions </a> 
+                    <br><br>Download Villboard Here:<br><a href="https://drive.google.com/file/d/18iBQu778YpjXTBSsuMAjg7RfiKKXq-1a/view?usp=sharing"> https://drive.google.com/file/d/18iBQu778YpjXTBSsuMAjg7RfiKKXq-1a/view?usp=sharing </a>
                     `),
                     image: [image]
                 });
@@ -1333,8 +1340,8 @@ var functions = {
                 await sendEmail({
                     to: transItem.user_payment.email,
                     subject: "Payment Declined",
-                    text: sendMessage(`Hi ${transItem.uFirstName},`, `Sorry! Your payment receipt has been declined by the ADMIN of Villa Caceres. due to the following reasons Incorrect reference number, Image is blurry, Same reference number with other transactions <br><br>Got questions? You can also reply to this email.<br>Visit our Terms and Conditions. <br> <a href="https://villboard-23c49.web.app/Terms_conditions"> </a> 
-                    <br><br>Download Villboard Here:<br><a href=""> </a>
+                    text: sendMessage(`Hi ${transItem.uFirstName},`, `Sorry! Your payment receipt has been declined by the ADMIN of Villa Caceres. due to the following reasons Incorrect reference number, Image is blurry, Same reference number with other transactions <br><br>Got questions? You can also reply to this email.<br>Visit our Terms and Conditions. <br> <a href="https://villboard-23c49.web.app/Terms_conditions"> ttps://villboard-23c49.web.app/Terms_conditions </a> 
+                    <br><br>Download Villboard Here:<br><a href="https://drive.google.com/drive/folders/1tjAoLTgRIkzO87zzJYvdaWxUMvzfNk4_?usp=sharing"> https://drive.google.com/drive/folders/1tjAoLTgRIkzO87zzJYvdaWxUMvzfNk4_?usp=sharing </a>
                     `),
                     image: [image]
                 });
