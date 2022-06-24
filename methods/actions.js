@@ -1290,7 +1290,7 @@ var functions = {
                 await sendEmail({
                     to: reserveItem.user_reservation.email,
                     subject: "Reservation Approved",
-                    text: sendMessage(`Hi ${reserveItem.rFirstName},`, `Congratulations! Your reservation has been approved by the ADMIN of Villa Caceres. For the reservation of ${reserveItem.venue} with the date and time of ${moment(reserveItem.reservationDate).format('ll')},${reserveItem.reservationTime}thank you for reservation. <br>Got questions? You can also reply to this email.<br>Visit our Terms and Conditions. <br> <a href="https://villboard-23c49.web.app/Terms_conditions"> </a> 
+                    text: sendMessage(`Hi ${reserveItem.rFirstName},`, `Congratulations! Your reservation has been approved by the ADMIN of Villa Caceres. For the reservation of ${reserveItem.venue} with the date and time of ${moment(reserveItem.reservationDate).format('ll')},${reserveItem.reservationTime}thank you for reservation. <br>Got questions? You can also reply to this email.<br>Visit our Terms and Conditions. <br> <a href="https://villboard-23c49.web.app/Terms_conditions"> https://villboard-23c49.web.app/Terms_conditions </a> 
                     <br><br>Download Villboard Here:<br><a href="https://drive.google.com/drive/folders/1tjAoLTgRIkzO87zzJYvdaWxUMvzfNk4_?usp=sharing"> https://drive.google.com/drive/folders/1tjAoLTgRIkzO87zzJYvdaWxUMvzfNk4_?usp=sharing </a>`),
                     image: [image]
                 });
@@ -1391,7 +1391,7 @@ const sendMessage = (header, text) => {
             color: black;
         }
         a{
-            background: rgba(0,0,0,.5);
+            background: rgba(0,0,0,.1);
             cursor: pointer; 
             color: white; 
             padding: 10px; 
