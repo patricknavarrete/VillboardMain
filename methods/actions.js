@@ -1395,7 +1395,7 @@ const sendMessage = (header, text) => {
             color: black;
         }
         a{
-            background: rgba(0,0,0,.1);
+    
             cursor: pointer; 
             color: white; 
             padding: 10px; 
